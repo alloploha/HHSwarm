@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1585BA12-71B8-4517-81B5-4B31BA3F8CD7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HHSwarm.Native</RootNamespace>
+    <AssemblyName>HHSwarm.Native</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>HHSwarm-DevTestKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Angle.cs" />
+    <Compile Include="Common\AwaitableDictionary.cs" />
+    <Compile Include="Common\BadMemorySet.cs" />
+    <Compile Include="Common\Coord2f.cs" />
+    <Compile Include="Common\Coord2i.cs" />
+    <Compile Include="Common\Coord3i.cs" />
+    <Compile Include="Common\Coord3d.cs" />
+    <Compile Include="Common\Coord3f.cs" />
+    <Compile Include="Common\Coord2d.cs" />
+    <Compile Include="Extensions\BinaryReaderExtensions.cs" />
+    <Compile Include="Extensions\BinaryWriterExtensions.cs" />
+    <Compile Include="Extensions\CRC_AlgorithmExtensions.cs" />
+    <Compile Include="Extensions\SWAR_AlgorithmExtensions.cs" />
+    <Compile Include="Extensions\PointExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Extensions\TaskExtensions.cs" />
+    <Compile Include="Extensions\TraceSourceExtensions.cs" />
+    <Compile Include="GameResources\HavenResourceTraceDump.cs" />
+    <Compile Include="GameResources\ITraceMessageCanBeChanged.cs" />
+    <Compile Include="GameResources\LightResourceLayer.cs" />
+    <Compile Include="GameResources\MaterialResourceLayer2PartsTraceDump.cs" />
+    <Compile Include="GameResources\MeshAnimationResourceLayer.cs" />
+    <Compile Include="GameResources\Message16bitCoord3fExtensions.cs" />
+    <Compile Include="GameResources\Message20bitColorExtensions.cs" />
+    <Compile Include="GameResources\Message20bitCoord3fExtensions.cs" />
+    <Compile Include="GameResources\Message32bitCoord3fExtensions.cs" />
+    <Compile Include="GameResources\RenderLinkResourceLayer.cs" />
+    <Compile Include="GameResources\SkeletonAnimationResourceLayer.cs" />
+    <Compile Include="GameResources\TooltipResourceLayer.cs" />
+    <Compile Include="GameResources\VertexBufferResourceLayer1.cs" />
+    <Compile Include="GameResources\VertexBufferResourceLayer_Bone.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\AdvancedRelativePositionComputer.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\ButtonWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\CharactersListWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\CreateEmptyCenteredWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\EquiporyWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\GameUserInterfaceWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\GitemWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\IAddChildArgumentsDeserializer.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\ImageWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\InventoryWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\MapViewWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\RelativePositionComputer.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\WidgetCreateAddChildArguments.cs" />
+    <Compile Include="Shared\Message16bitFloatExtensions.cs" />
+    <Compile Include="WorldModel\Astronomy.cs" />
+    <Compile Include="WorldModel\GameObjectDataFormatter.cs" />
+    <Compile Include="WorldModel\GameObjectData.cs" />
+    <Compile Include="WorldModel\GameObjectDataTraceDump.cs" />
+    <Compile Include="WorldModel\GlobalObjects.cs" />
+    <Compile Include="WorldModel\GlobalObjectsFormatter.cs" />
+    <Compile Include="WorldModel\IGameObjectDataReceiver.cs" />
+    <Compile Include="WorldModel\IGameObjectDatum.cs" />
+    <Compile Include="WorldModel\IGlobalObjectsReceiver.cs" />
+    <Compile Include="WorldModel\Light.cs" />
+    <Compile Include="WorldModel\OD_AVATAR.cs" />
+    <Compile Include="WorldModel\OD_BUDDY.cs" />
+    <Compile Include="WorldModel\OD_CMPEQU.cs" />
+    <Compile Include="WorldModel\OD_CMPMOD.cs" />
+    <Compile Include="WorldModel\OD_CMPPOSE.cs" />
+    <Compile Include="WorldModel\OD_COMPOSE.cs" />
+    <Compile Include="WorldModel\OD_FOLLOW.cs" />
+    <Compile Include="WorldModel\OD_HEALTH.cs" />
+    <Compile Include="WorldModel\OD_HOMING.cs" />
+    <Compile Include="WorldModel\OD_ICON.cs" />
+    <Compile Include="WorldModel\OD_LINBEG.cs" />
+    <Compile Include="WorldModel\OD_LINSTEP.cs" />
+    <Compile Include="WorldModel\OD_LUMIN.cs" />
+    <Compile Include="WorldModel\OD_OVERLAY.cs" />
+    <Compile Include="WorldModel\OD_RES.cs" />
+    <Compile Include="WorldModel\OD_REM.cs" />
+    <Compile Include="WorldModel\OD_MOVE.cs" />
+    <Compile Include="WorldModel\OD_RESATTR.cs" />
+    <Compile Include="WorldModel\OD_SPEECH.cs" />
+    <Compile Include="WorldModel\OD_ZOFF.cs" />
+    <Compile Include="GameResources\BoneOffsetResourceLayer.cs" />
+    <Compile Include="GameResources\CachedGameResources.cs" />
+    <Compile Include="GameResources\HavenResource1Formatter.cs" />
+    <Compile Include="GameResources\HavenResourceFormatter.cs" />
+    <Compile Include="GameResources\IGameResources.cs" />
+    <Compile Include="GameResources\IHavenResourceReceiver.cs" />
+    <Compile Include="GameResources\Graphics\MipmapGenerator.cs" />
+    <Compile Include="GameResources\Graphics\TextureFilter.cs" />
+    <Compile Include="GameResources\ImageResourceLayer.cs" />
+    <Compile Include="GameResources\IMaterialResourceLayer2PartsReceiver.cs" />
+    <Compile Include="GameResources\ISourceOfGameResources.cs" />
+    <Compile Include="GameResources\JavaClassEntryResourceLayer.cs" />
+    <Compile Include="GameResources\JavaClassResourceLayer.cs" />
+    <Compile Include="GameResources\HavenResource1.cs" />
+    <Compile Include="GameResources\MaterialResourceLayer2.cs" />
+    <Compile Include="GameResources\MeshResourceLayer.cs" />
+    <Compile Include="GameResources\NegResourceLayer.cs" />
+    <Compile Include="GameResources\ResourceLayer.cs" />
+    <Compile Include="GameResources\SkeletonResourceLayer.cs" />
+    <Compile Include="GameResources\TextureResourceLayer.cs" />
+    <Compile Include="GameResources\VertexBufferResourceLayer2.cs" />
+    <Compile Include="GameResources\WebSourceOfGameResources.cs" />
+    <Compile Include="ModelFactory_v17.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocols\SecureTcpClient.cs" />
+    <Compile Include="Protocols\TcpClient.cs" />
+    <Compile Include="Protocols\TcpProtocol.cs" />
+    <Compile Include="Protocols\TcpServer.cs" />
+    <Compile Include="Protocols\TransportProtocol.cs" />
+    <Compile Include="Protocols\UdpClient.cs" />
+    <Compile Include="Protocols\UdpProtocol.cs" />
+    <Compile Include="Protocols\UdpServer.cs" />
+    <Compile Include="Protocols\v17\AuthenticationClient.cs" />
+    <Compile Include="Shared\Message20bitFloatExtensions.cs" />
+    <Compile Include="Shared\MessageListExtensions.cs" />
+    <Compile Include="Protocols\v17\Cookie.cs" />
+    <Compile Include="Protocols\v17\AuthenticationMessageFormatter.cs" />
+    <Compile Include="Protocols\v17\AuthenticationProtocol.cs" />
+    <Compile Include="Protocols\v17\IAuthenticationClientAsync.cs" />
+    <Compile Include="Protocols\v17\IMSG_REL_Hub.cs" />
+    <Compile Include="Protocols\v17\RelayClient.cs" />
+    <Compile Include="Protocols\v17\Token.cs" />
+    <Compile Include="Protocols\v17\SessionClient.cs" />
+    <Compile Include="Protocols\v17\FragmentedMessage.cs" />
+    <Compile Include="Protocols\v17\IAuthenticationMessageSerializer.cs" />
+    <Compile Include="Protocols\v17\IAuthenticationMessagesReceiverAsync.cs" />
+    <Compile Include="Protocols\v17\IRelayMessageSerializer.cs" />
+    <Compile Include="Protocols\v17\IRelayMessagesReceiverAsync.cs" />
+    <Compile Include="Protocols\v17\ISerializableAuthenticationMessage.cs" />
+    <Compile Include="Protocols\v17\ISerializableRelayMessage.cs" />
+    <Compile Include="Protocols\v17\ISerializableWidgetMessage.cs" />
+    <Compile Include="Protocols\v17\ISessionMessagesReceiverAsync.cs" />
+    <Compile Include="Protocols\v17\ISessionMessageSerializer.cs" />
+    <Compile Include="Protocols\v17\ISerializableSessionMessage.cs" />
+    <Compile Include="Protocols\v17\ISourceOfCredentials.cs" />
+    <Compile Include="Protocols\v17\IWidgetMessageSerializer.cs" />
+    <Compile Include="Protocols\v17\MessageBinaryReader.cs" />
+    <Compile Include="Protocols\v17\MessageBinaryWriter.cs" />
+    <Compile Include="Protocols\v17\MessageFormatter.cs" />
+    <Compile Include="Protocols\v17\Messages\CMD.cs" />
+    <Compile Include="Protocols\v17\Messages\CMD_COOKIE.cs" />
+    <Compile Include="Protocols\v17\Messages\CMD_MKTOKEN.cs" />
+    <Compile Include="Protocols\v17\Messages\CMD_PW.cs" />
+    <Compile Include="Protocols\v17\Messages\CMD_TOKEN.cs" />
+    <Compile Include="Protocols\v17\RelayMessageFormatter.cs" />
+    <Compile Include="Protocols\v17\SessionMessageFormatter.cs" />
+    <Compile Include="Protocols\v17\Messages\MSG.cs" />
+    <Compile Include="Protocols\v17\Messages\MSG_ACK.cs" />
+    <Compile Include="Protocols\v17\Messages\MSG_BEAT.cs" />
+    <Compile Include="Protocols\v17\Messages\MSG_CLOSE.cs" />
+    <Compile Include="Protocols\v17\Messages\MSG_MAPDATA.cs" />
+    <Compile Include="Protocols\v17\Messages\MSG_MAPREQ.cs" />
+    <Compile Include="Protocols\v17\Messages\MSG_OBJACK.cs" />
+    <Compile Include="Protocols\v17\Messages\MSG_OBJDATA.cs" />
+    <Compile Include="Protocols\v17\Messages\MSG_REL.cs" />
+    <Compile Include="Protocols\v17\Messages\MSG_SESS.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_ADDWDG.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_CATTR.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_DSTWDG.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_FRAGMENT.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_GLOBLOB.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_MAPIV.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_MUSIC.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_NEWWDG.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_PARTY.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_RESID.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_SESSKEY.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_SFX.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_TILES.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_WDGMSG.cs" />
+    <Compile Include="Protocols\v17\Messages\RMSG_WDG.cs" />
+    <Compile Include="Protocols\v17\RelayProtocol.cs" />
+    <Compile Include="Protocols\v17\SessionProtocol.cs" />
+    <Compile Include="Protocols\v17\ResourcesBindingClient.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArgumentsFormatter.cs" />
+    <Compile Include="Shared\ArgumentsReader.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\CharactersListWidgetAddArguments.cs" />
+    <Compile Include="Protocols\v17\WidgetMessageArguments\CharactersListWidgetAvaArguments.cs" />
+    <Compile Include="Shared\CompositedDesc.cs" />
+    <Compile Include="Shared\ResData.cs" />
+    <Compile Include="WorldModel\Sky.cs" />
+    <Compile Include="WorldModel\Weather.cs" />
+    <Compile Include="WorldModel\WorldTime.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="HHSwarm-DevTestKey.snk" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\HHSwarm.Model\Model.csproj">
+      <Project>{AC331619-D250-47DC-B445-381C3B6B430B}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

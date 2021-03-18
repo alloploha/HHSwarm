@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Native", "HHSwarm.Native\Native.csproj", "{1585BA12-71B8-4517-81B5-4B31BA3F8CD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "HHSwarm.Model\Model.csproj", "{AC331619-D250-47DC-B445-381C3B6B430B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automation", "HHSwarm.Automation\Automation.csproj", "{B13409E8-A84F-4308-9751-F9FF977C19C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Native.Tests", "HHSwarm.Native.Tests\Native.Tests.csproj", "{88FCC8C7-ACB3-4224-93ED-ED947D97B45D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestsSettings", "TestsSettings", "{6945C2F0-BBC0-47E3-AB38-48BFBE67489A}"
+	ProjectSection(SolutionItems) = preProject
+		LiveAccountAndServer.runsettings = LiveAccountAndServer.runsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClient", "HHSwarm.TestClient\TestClient.csproj", "{209548A3-E565-4D30-B916-5968EDEFC31E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1585BA12-71B8-4517-81B5-4B31BA3F8CD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1585BA12-71B8-4517-81B5-4B31BA3F8CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1585BA12-71B8-4517-81B5-4B31BA3F8CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1585BA12-71B8-4517-81B5-4B31BA3F8CD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC331619-D250-47DC-B445-381C3B6B430B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC331619-D250-47DC-B445-381C3B6B430B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC331619-D250-47DC-B445-381C3B6B430B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC331619-D250-47DC-B445-381C3B6B430B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B13409E8-A84F-4308-9751-F9FF977C19C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B13409E8-A84F-4308-9751-F9FF977C19C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B13409E8-A84F-4308-9751-F9FF977C19C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B13409E8-A84F-4308-9751-F9FF977C19C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88FCC8C7-ACB3-4224-93ED-ED947D97B45D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88FCC8C7-ACB3-4224-93ED-ED947D97B45D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88FCC8C7-ACB3-4224-93ED-ED947D97B45D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88FCC8C7-ACB3-4224-93ED-ED947D97B45D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{209548A3-E565-4D30-B916-5968EDEFC31E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{209548A3-E565-4D30-B916-5968EDEFC31E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{209548A3-E565-4D30-B916-5968EDEFC31E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{209548A3-E565-4D30-B916-5968EDEFC31E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F052222-2654-4300-8CDB-BAEF9066412F}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dwarf.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = HHSwarm.Native\\Native.csproj
+		SccProjectName1 = HHSwarm.Native
+		SccLocalPath1 = HHSwarm.Native
+		SccProjectUniqueName2 = HHSwarm.Model\\Model.csproj
+		SccProjectName2 = HHSwarm.Model
+		SccLocalPath2 = HHSwarm.Model
+		SccProjectUniqueName3 = HHSwarm.Automation\\Automation.csproj
+		SccProjectName3 = HHSwarm.Automation
+		SccLocalPath3 = HHSwarm.Automation
+		SccProjectUniqueName4 = HHSwarm.Native.Tests\\Native.Tests.csproj
+		SccProjectName4 = HHSwarm.Native.Tests
+		SccLocalPath4 = HHSwarm.Native.Tests
+		SccProjectUniqueName5 = HHSwarm.TestClient\\TestClient.csproj
+		SccProjectName5 = HHSwarm.TestClient
+		SccLocalPath5 = HHSwarm.TestClient
+	EndGlobalSection
+EndGlobal

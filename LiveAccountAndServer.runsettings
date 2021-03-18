@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <TestRunParameters>
+    <Parameter name="GameServerAddress" value="game.havenandhearth.com" />
+    <Parameter name="GameServerPort" value="1870" />
+    <Parameter name="AuthenticationServerAddress" value="game.havenandhearth.com" />
+    <Parameter name="AuthenticationServerPort" value="1871" />
+    <Parameter name="AuthenticationServerSslProtocol" value="Tls11"/>
+    <Parameter name="AuthenticationServerCertHashes" value="9F3B633FF9CDDA0108EDDDE8332366F0DED2E920"/>
+    <Parameter name="PlayerLoginName" value="$LoginName$" />
+    <Parameter name="PlayerPassword" value="$Password$" />
+    <Parameter name="LiveSSLTestHostAddress" value="www.google.com" />
+    <Parameter name="LiveSSLTestHostPort" value="443" />
+  </TestRunParameters>
+</RunSettings>

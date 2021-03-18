@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="HHSwarm.TestClient.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="GameServerAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">game.havenandhearth.com</Value>
+    </Setting>
+    <Setting Name="GameServerPort" Type="System.UInt16" Scope="Application">
+      <Value Profile="(Default)">1870</Value>
+    </Setting>
+    <Setting Name="AuthenticationServerAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">game.havenandhearth.com</Value>
+    </Setting>
+    <Setting Name="AuthenticationServerPort" Type="System.UInt16" Scope="Application">
+      <Value Profile="(Default)">1871</Value>
+    </Setting>
+    <Setting Name="AuthenticationServerSslProtocol" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Tls11</Value>
+    </Setting>
+    <Setting Name="AuthenticationServerCertHashes" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;9F3B633FF9CDDA0108EDDDE8332366F0DED2E920&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="PlayerLoginName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">$LoginName$</Value>
+    </Setting>
+    <Setting Name="PlayerPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">$Password$</Value>
+    </Setting>
+    <Setting Name="ResourceServerBaseUri" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://game.havenandhearth.com/hres</Value>
+    </Setting>
+    <Setting Name="HeartBeatInterval" Type="System.TimeSpan" Scope="Application">
+      <Value Profile="(Default)">00:00:05</Value>
+    </Setting>
+    <Setting Name="ExtractResourcesTo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\TEMP\HHSwarm-ExtractedResources</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
