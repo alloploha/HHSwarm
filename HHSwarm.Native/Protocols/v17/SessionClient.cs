@@ -31,6 +31,8 @@ namespace HHSwarm.Native.Protocols.v17
             this.Authentication = authentication;//?? throw new ArgumentNullException();
 
             this.Connected += SessionClient_Connected;
+            this.ConnectionFailed += SessionClient_ConnectionFailed;
+            this.ClientIsTooOld += SessionClient_ConnectionFailed;
 
             this.InvalidToken += RenewAuthenticationToken;
             this.TokenExpired += RenewAuthenticationToken;
@@ -215,12 +217,22 @@ namespace HHSwarm.Native.Protocols.v17
             tsc.SetResult(true);
         }
 
+        private bool KeepTryingToConnect = true;
+
+        private void SessionClient_ConnectionFailed()
+        {
+            var tsc = MSG_SESS_Requests.Dequeue();
+            tsc.SetResult(false);
+
+            KeepTryingToConnect = false;
+        }
+
         private async Task ConnectAsync(string accountName, byte[] cookieData, ISourceOfCredentials credentialsStore)
         {
             if (cookieData != null && cookieData.Length > 0 && !String.IsNullOrEmpty(accountName))
             {
-                TaskCompletionSource<bool> msg_sess_tsc = new TaskCompletionSource<bool>();
-                MSG_SESS_Requests.Enqueue(msg_sess_tsc);
+                TaskCompletionSource<bool> msg_sess_tcs = new TaskCompletionSource<bool>();
+                MSG_SESS_Requests.Enqueue(msg_sess_tcs);
 
                 try
                 {
@@ -239,7 +251,7 @@ namespace HHSwarm.Native.Protocols.v17
 
                 try
                 {
-                    connected = await msg_sess_tsc.Task;
+                    connected = await msg_sess_tcs.Task;
                 }
                 catch (AuthenticationException e)
                 {
@@ -248,7 +260,7 @@ namespace HHSwarm.Native.Protocols.v17
                     await credentialsStore.SaveCookieAsync(null);
                 }
 
-                if (!connected)
+                if (!connected && KeepTryingToConnect)
                 {
                     await ConnectAsync(credentialsStore);
                 }

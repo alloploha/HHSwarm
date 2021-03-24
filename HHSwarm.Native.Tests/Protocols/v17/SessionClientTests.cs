@@ -3,6 +3,7 @@ using HHSwarm.Native.Protocols.v17.Messages;
 using Microsoft.QualityTools.Testing.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Authentication;
@@ -77,22 +78,35 @@ namespace HHSwarm.Native.Protocols.v17.Tests
                 bool? connected = null;
                 session.MSG_SESS_RESPONSE_Received += async (msg) =>
                 {
+                    Trace.WriteLine($"{nameof(msg.ErrorCode)}: {msg.ErrorCode}", nameof(session.MSG_SESS_RESPONSE_Received));
+
                     connected = msg.ErrorCode == MSG_SESS.RESPONSE.ERROR_CODE.SUCCESS;
+
                     await session.DisconnectAsync();
                 };
 
                 session.MSG_CLOSE_Received += async (msg) =>
                 {
+                    Trace.WriteLine(String.Empty, nameof(session.MSG_CLOSE_Received));
+
                     await session.DisconnectAsync();
                 };
 
                 Task session_listen = session_transport.ListenAsync(200);
                 Task auth_listen = auth_transport.ListenAsync(200);
 
+                Trace.WriteLine("BEFORE", nameof(session.ConnectAsync));
                 await session.ConnectAsync(creds);
+                Trace.WriteLine("AFTER", nameof(session.ConnectAsync));
 
                 await Task.Delay(10);
+
+                Assert.IsTrue(connected == true, "Was not able to establish connection! Check debug output for details.");
+
+                Trace.WriteLine("BEFORE", nameof(session.DisconnectAsync));
                 await session.DisconnectAsync();
+                Trace.WriteLine("AFTER", nameof(session.DisconnectAsync));
+
                 await Task.Delay(5);
                 await Task.WhenAll(auth_transport.CloseAsync(), session_transport.CloseAsync());
 
