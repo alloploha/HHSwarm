@@ -19,7 +19,7 @@ namespace HHSwarm.Native.Protocols.Tests
         [TestMethod]
         public async Task ListenAsync_CancelSlowPoll_Test()
         {
-            int port = Convert.ToInt32(TestContext.Properties["GameServerPort"]);
+            int port = Convert.ToInt32(TestContext.Properties["LocalListenerPort"]);
 
             UdpClient p = UdpClient.Create
             (
@@ -42,7 +42,7 @@ namespace HHSwarm.Native.Protocols.Tests
         [TestMethod]
         public async Task ListenAsync_CancelFastPoll_Test()
         {
-            int port = Convert.ToInt32(TestContext.Properties["GameServerPort"]);
+            int port = Convert.ToInt32(TestContext.Properties["LocalListenerPort"]);
 
             UdpClient p = UdpClient.Create
             (
@@ -69,7 +69,7 @@ namespace HHSwarm.Native.Protocols.Tests
         [TestMethod]
         public async Task SendAsync_Byte_Test()
         {
-            int port = Convert.ToInt32(TestContext.Properties["GameServerPort"]);
+            int port = Convert.ToInt32(TestContext.Properties["LocalListenerPort"]);
 
             System.Net.Sockets.UdpClient server = new System.Net.Sockets.UdpClient(port, System.Net.Sockets.AddressFamily.InterNetwork);
 
@@ -111,7 +111,7 @@ namespace HHSwarm.Native.Protocols.Tests
         [TestMethod]
         public async Task SendAsync_MaxSize_Test()
         {
-            int port = Convert.ToInt32(TestContext.Properties["GameServerPort"]);
+            int port = Convert.ToInt32(TestContext.Properties["LocalListenerPort"]);
 
             System.Net.Sockets.UdpClient server = new System.Net.Sockets.UdpClient(port, System.Net.Sockets.AddressFamily.InterNetwork);
 
@@ -156,7 +156,7 @@ namespace HHSwarm.Native.Protocols.Tests
         [TestMethod]
         public async Task ListenAsyncTest()
         {
-            int port = Convert.ToInt32(TestContext.Properties["GameServerPort"]);
+            int port = Convert.ToInt32(TestContext.Properties["LocalListenerPort"]);
 
             System.Net.Sockets.UdpClient server = new System.Net.Sockets.UdpClient(port, System.Net.Sockets.AddressFamily.InterNetwork);
 

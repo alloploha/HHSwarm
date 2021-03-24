@@ -19,7 +19,7 @@ namespace HHSwarm.Native.Protocols.Tests
         [TestMethod()]
         public async Task ListenAsyncTest()
         {
-            int port = Convert.ToInt32(TestContext.Properties["AuthenticationServerPort"]);
+            int port = Convert.ToInt32(TestContext.Properties["LocalListenerPort"]);
             TcpProtocol thisServer = TcpServer.Create((s, o) => new BinaryReader(s, Encoding.ASCII, o), (s, o) => new BinaryWriter(s, Encoding.ASCII, o), port);
 
             string receivedString = null;
@@ -48,6 +48,8 @@ namespace HHSwarm.Native.Protocols.Tests
             }
 
             client.Close();
+
+            await Task.Delay(1000); // this is to make sure server had chance to process incoming data.
 
             Task.WaitAll(thisServer.CloseAsync(), listenTask);
 

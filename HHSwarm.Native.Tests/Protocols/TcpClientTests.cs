@@ -18,7 +18,7 @@ namespace HHSwarm.Native.Protocols.Tests
         [TestMethod()]
         public async Task SendAsyncTest()
         {
-            int port = Convert.ToInt32(TestContext.Properties["AuthenticationServerPort"]);
+            int port = Convert.ToInt32(TestContext.Properties["LocalListenerPort"]);
             TcpListener server = new TcpListener(IPAddress.Loopback, port);
             server.Start();
             TcpClient thisClient = TcpClient.Create((s, o) => new BinaryReader(s, Encoding.ASCII, o), (s, o) => new BinaryWriter(s, Encoding.ASCII, o), IPAddress.Loopback.MapToIPv4().ToString(), port);
@@ -48,7 +48,7 @@ namespace HHSwarm.Native.Protocols.Tests
         [TestMethod]
         public async Task ListenAsyncTest()
         {
-            int port = Convert.ToInt32(TestContext.Properties["AuthenticationServerPort"]);
+            int port = Convert.ToInt32(TestContext.Properties["LocalListenerPort"]);
             TcpListener server = new TcpListener(IPAddress.Loopback, port);
             server.Start();
             TcpClient thisClient = TcpClient.Create((s, o) => new BinaryReader(s, Encoding.ASCII, o), (s, o) => new BinaryWriter(s, Encoding.ASCII, o), IPAddress.Loopback.MapToIPv4().ToString(), port);
@@ -91,7 +91,7 @@ namespace HHSwarm.Native.Protocols.Tests
         [TestMethod]
         public async Task ListenAsyncManyTest()
         {
-            int port = Convert.ToInt32(TestContext.Properties["AuthenticationServerPort"]);
+            int port = Convert.ToInt32(TestContext.Properties["LocalListenerPort"]);
             TcpListener server = new TcpListener(IPAddress.Loopback, port);
             server.Start();
             TcpClient thisClient = TcpClient.Create((s, o) => new BinaryReader(s, Encoding.ASCII, o), (s, o) => new BinaryWriter(s, Encoding.ASCII, o), IPAddress.Loopback.MapToIPv4().ToString(), port);
