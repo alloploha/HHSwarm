@@ -18,7 +18,7 @@ But, there are some critical issues that cannot be resolved easily. Some of them
 
 ## How to compile and to run
 1. For successful project build you would need:
-   1. Visual Studio 2019, or Visual Studio 2017 possibly.
+   1. Visual Studio 2017, or Visual Studio 2019 possibly.
    1. .NET Framework 4.6
 1. Make project **TestClient** to be default for run.
 1. Find and replace `$LoginName$` with user account name. Find and replace `$Password$` to password. 
