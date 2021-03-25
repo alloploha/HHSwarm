@@ -99,7 +99,7 @@ namespace HHSwarm.Native.Protocols.Hafen.Tests
                 await session.ConnectAsync(creds);
                 Trace.WriteLine("AFTER", nameof(session.ConnectAsync));
 
-                await Task.Delay(10);
+                await Task.Delay(3000); // if not to makedelay, MSG_SESS_RESPONSE can be processed later and 'connected' will be 'false'.
 
                 Assert.IsTrue(connected == true, "Was not able to establish connection! Check debug output for details.");
 
