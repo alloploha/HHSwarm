@@ -1,4 +1,4 @@
-﻿using HHSwarm.Native.Protocols.v17;
+﻿using HHSwarm.Native.Protocols.Hafen;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;

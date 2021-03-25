@@ -1,4 +1,4 @@
-﻿using HHSwarm.Native.Protocols.v17.WidgetMessageArguments;
+﻿using HHSwarm.Native.Protocols.Hafen.WidgetMessageArguments;
 using HHSwarm.Native.Shared;
 using System;
 using System.Collections.Generic;

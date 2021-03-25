@@ -1,5 +1,5 @@
 ﻿using HHSwarm.Native.GameResources.Graphics;
-using HHSwarm.Native.Protocols.v17;
+using HHSwarm.Native.Protocols.Hafen;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
