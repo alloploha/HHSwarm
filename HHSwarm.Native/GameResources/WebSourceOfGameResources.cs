@@ -10,6 +10,14 @@ using System.Threading.Tasks;
 
 namespace HHSwarm.Native.GameResources
 {
+    /// <summary>
+    /// Скачивает файлы "ресурсов" с веб-сервера.
+    /// Логически, ресурсы - это неизменяемые данные, не зависящие от конкретного игрока или текущего состояния игры.
+    /// Например: текстуры, параметры источников света, текст, номера версий обьектов, растровые изображения, скомпилированные java-классы.
+    /// Физически, каждый ресурс - это файл, специального формата.
+    /// <seealso cref="HavenResource1"/>
+    /// <seealso cref="HavenResource1Formatter"/>
+    /// </summary>
     public class WebSourceOfGameResources : ISourceOfGameResources
     {
         private TraceSource Trace = new TraceSource("HHSwarm.Resources");

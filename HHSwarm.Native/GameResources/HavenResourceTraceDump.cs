@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HHSwarm.Native.GameResources
 {
+    /// <summary>
+    /// Выводит содержимое ресурса в поток трассировки. Используется для отладки. Источник: "HHSwarm.Resources".
+    /// </summary>
     class HavenResourceTraceDump : IHavenResourceReceiver, ITraceMessageCanBeChanged
     {
         private TraceSource Trace = new TraceSource("HHSwarm.Resources");

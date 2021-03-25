@@ -12,6 +12,14 @@ using System.Threading.Tasks;
 
 namespace HHSwarm.Native.Protocols.Hafen
 {
+    /// <summary>
+    /// Разрешает проблему асинхронного получения: команд на создание\изменение объектов, описаний ресурсов, и самих ресурсов.
+    /// При получении сообщений типа <see cref="RMSG_NEWWDG"/>, для которых необходимы ресурсы:
+    /// <list type="number">
+    /// <item>удостоверяется, что необходимые ресурсы уже присутствуют, или если их нет, то получает из указанного источника</item>
+    /// <item>откладывает команду до момента, когда все необходимые ресурсы станут доступны</item>
+    /// <item>вызывает событие исполнения команды и передаёт в неё всю необходимую информацию, включая параметры создания объекта и необходимые для этого ресурсы</item>
+    /// </list>
     public class ResourcesBindingClient
     {
         protected TraceSource Trace = new TraceSource("HHSwarm.Resources");
@@ -350,6 +358,24 @@ namespace HHSwarm.Native.Protocols.Hafen
                         WidgetArgumentsFormatter.Deserialize(new ArgumentsReader(message.CreateArguments), out create_arguments);
 
                         Debugger.Break(); // TODO: Implement next! - "inv"
+                    }
+                    break;
+                case "fmg":
+                    // ??? @RName("fmg")
+                    {
+                        InventoryWidgetCreateArguments create_arguments;
+                        WidgetArgumentsFormatter.Deserialize(new ArgumentsReader(message.CreateArguments), out create_arguments);
+
+                        Debugger.Break(); // TODO: Implement next! - "fmg"
+                    }
+                    break;
+                case "chr":
+                    // ??? @RName("chr")
+                    {
+                        InventoryWidgetCreateArguments create_arguments;
+                        WidgetArgumentsFormatter.Deserialize(new ArgumentsReader(message.CreateArguments), out create_arguments);
+
+                        Debugger.Break(); // TODO: Implement next! - "chr"
                     }
                     break;
                 default:

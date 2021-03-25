@@ -13,14 +13,14 @@ using System.Threading.Tasks;
 
 namespace HHSwarm.Native
 {
-    public class ModelFactory_v17 : IModelFactory
+    public class ModelFactory : IModelFactory
     {
         ResourcesBindingClient Client;
         RelayClient Relay;
         SessionClient Session;
         RelativePositionComputer Computer;
 
-        public ModelFactory_v17(RelayClient relay, SessionClient session, ResourcesBindingClient client)
+        public ModelFactory(RelayClient relay, SessionClient session, ResourcesBindingClient client)
         {
             this.Session = session;
             this.Client = client;

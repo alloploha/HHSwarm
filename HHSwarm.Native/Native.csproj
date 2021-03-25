@@ -149,7 +149,7 @@
     <Compile Include="GameResources\TextureResourceLayer.cs" />
     <Compile Include="GameResources\VertexBufferResourceLayer2.cs" />
     <Compile Include="GameResources\WebSourceOfGameResources.cs" />
-    <Compile Include="ModelFactory_v17.cs" />
+    <Compile Include="ModelFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocols\SecureTcpClient.cs" />
     <Compile Include="Protocols\TcpClient.cs" />

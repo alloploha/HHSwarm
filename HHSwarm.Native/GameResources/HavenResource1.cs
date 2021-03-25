@@ -14,7 +14,7 @@ namespace HHSwarm.Native.GameResources
     [Serializable]
     public class HavenResource1 : IHavenResourceReceiver
     {
-        private static readonly byte[] FILE_SIGNATURE = Encoding.ASCII.GetBytes("Haven Resource 1");
+        internal static readonly byte[] FILE_SIGNATURE = Encoding.ASCII.GetBytes("Haven Resource 1");
 
 
         public readonly IList<JavaClassResourceLayer> JavaClasses = new List<JavaClassResourceLayer>();
