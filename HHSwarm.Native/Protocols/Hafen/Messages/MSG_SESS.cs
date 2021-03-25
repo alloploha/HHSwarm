@@ -12,7 +12,7 @@ namespace HHSwarm.Native.Protocols.Hafen.Messages
         {
             public ushort Reserved = 2;
             public string ProtocolName = @"Hafen/default";
-            public ushort ProtocolVersion = 20;
+            public ushort ProtocolVersion = 24;
             public string AccountName;
             public byte[] Cookie;
 
