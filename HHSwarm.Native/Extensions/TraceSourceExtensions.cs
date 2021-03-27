@@ -110,6 +110,18 @@ namespace System.Diagnostics
                 return value;
         }
 
+        [Conditional("DEBUG")]
+        public static void TraceDebug(this TraceSource @this, string message)
+        {
+            @this.TraceEvent(TraceEventType.Verbose, 0, message, null);
+        }
+
+        [Conditional("DEBUG")]
+        public static void TraceDebug(this TraceSource @this, string format, params object[] args)
+        {
+            @this.TraceEvent(TraceEventType.Verbose, 0, format, args);
+        }
+
         public static void TraceWarning(this TraceSource @this, string message)
         {
             @this.TraceEvent(TraceEventType.Warning, 0, message, null);
@@ -128,6 +140,52 @@ namespace System.Diagnostics
         public static void TraceCritical(this TraceSource @this, string format, params object[] args)
         {
             @this.TraceEvent(TraceEventType.Critical, 0, format, args);
+        }
+
+        public class DebugTraceScope : IDisposable
+        {
+            private TraceSource Trace;
+            public string Message { get; private set; }
+            public string Name { get; private set; }
+
+            private const char MARKER_BEGIN = '<';
+            private const char MARKER_END = '>';
+            private const byte MARKER_LENGTH = 8;
+            private const char MARKER_SPACE = ' ';
+
+            public DebugTraceScope(TraceSource trace, string name, string message)
+            {
+                this.Trace = trace;
+                this.Name = name;
+                this.Message = message;
+
+                Write(MARKER_BEGIN, Message);
+
+            }
+
+            public void Dispose()
+            {
+                if (Trace != null)
+                {
+                    Write(MARKER_END, Message);
+                    Trace = null;
+                }
+            }
+
+            public void Write(string message)
+            {
+                Write(MARKER_SPACE, message);
+            }
+
+            private void Write(char marker, string message)
+            {
+                Trace.TraceDebug(message != null ? "{0} {1}, \"{2}\"" : "{0} {1}", new string(marker, MARKER_LENGTH), Name, message);
+            }
+        }
+
+        public static DebugTraceScope Scope(this TraceSource @this, string name, string message = null)
+        {
+            return new DebugTraceScope(@this, name, message);
         }
     }
 }

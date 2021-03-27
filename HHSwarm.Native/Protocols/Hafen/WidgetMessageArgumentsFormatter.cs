@@ -154,6 +154,9 @@ namespace HHSwarm.Native.Protocols.Hafen
             }
         }
 
+        /// <remarks>
+        /// https://github.com/dolda2000/hafen-client/blob/394a9d64bc732ed8c2eb6e5df1b57dd08b97c4d8/src/haven/IButton.java#L41
+        /// </remarks>
         public void Deserialize(ArgumentsReader reader, out ButtonWidgetCreateArguments result)
         {
             if (reader.Length != 2) throw new ArgumentException($"Number of create widget arguments for {nameof(ButtonWidgetCreateArguments)} is {reader.Length} while expected number is 2!");
@@ -161,7 +164,7 @@ namespace HHSwarm.Native.Protocols.Hafen
             result = new ButtonWidgetCreateArguments()
             {
                 UpImageResourceName = reader.ReadString(), // [0]
-                DownImageResource = reader.ReadString() // [1]
+                DownImageResourceName = reader.ReadString() // [1]
             };
         }
 
@@ -295,6 +298,9 @@ namespace HHSwarm.Native.Protocols.Hafen
                 result.Data = reader.ReadBytes();
         }
 
+        /// <remarks>
+        /// https://github.com/dolda2000/hafen-client/blob/974366a68c0e61ee175a678d574f863705eac352/src/haven/Equipory.java#L86-L91
+        /// </remarks>
         public void Deserialize(ArgumentsReader reader, out EquiporyWidgetCreateArguments result)
         {
             result = new EquiporyWidgetCreateArguments();
@@ -307,6 +313,9 @@ namespace HHSwarm.Native.Protocols.Hafen
             }
         }
 
+        /// <remarks>
+        /// https://github.com/dolda2000/hafen-client/blob/c90a0aea7a84f7ab738c1d7c40556ae50decf03f/src/haven/Inventory.java#L61
+        /// </remarks>
         public void Deserialize(ArgumentsReader reader, out InventoryWidgetCreateArguments result)
         {
             result = new InventoryWidgetCreateArguments()

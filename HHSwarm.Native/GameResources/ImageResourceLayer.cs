@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace HHSwarm.Native.GameResources
 {
-    /// <summary>
-    /// '@LayerName("image")'
-    /// </summary>
+    /// <remarks>
+    /// @LayerName("image")
+    /// https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L915
+    /// </remarks>
     [Serializable]
     public class ImageResourceLayer : ResourceLayer
     {

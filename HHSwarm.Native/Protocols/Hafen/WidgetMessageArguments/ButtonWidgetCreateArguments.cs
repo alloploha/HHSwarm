@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace HHSwarm.Native.Protocols.Hafen.WidgetMessageArguments
 {
-    /// <summary>
-    /// '@RName("ibtn")'
-    /// </summary>
+    /// <remarks>
+    /// @RName("ibtn")
+    /// https://github.com/dolda2000/hafen-client/blob/394a9d64bc732ed8c2eb6e5df1b57dd08b97c4d8/src/haven/IButton.java#L38
+    /// </remarks>
     class ButtonWidgetCreateArguments
     {
         public string UpImageResourceName;
-        public string DownImageResource;
+        public string DownImageResourceName;
     }
 }

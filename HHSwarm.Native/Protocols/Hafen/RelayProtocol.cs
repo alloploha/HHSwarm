@@ -9,6 +9,10 @@ using static HHSwarm.Native.Protocols.TransportProtocol;
 
 namespace HHSwarm.Native.Protocols.Hafen
 {
+    /// <summary>
+    /// Упаковывает и распаковывает сообщения в <see cref="MSG_REL"/>.
+    /// Преобразовывает полученные сообщения в события.
+    /// </summary>
     public abstract class RelayProtocol : IRelayMessagesReceiverAsync
     {
         protected TraceSource Trace = new TraceSource("HHSwarm.Relay");
@@ -35,7 +39,7 @@ namespace HHSwarm.Native.Protocols.Hafen
             {
                 await Formatter.DeserializeAsync(CreateReader(mem, false), this);
 
-                if (mem.Position < mem.Length) throw new Exception($"Not all data has beed read from stream and deserialized! Length of data taken is {mem.Position} bytes, but message size was {mem.Length} bytes. Check corresponding {nameof(Formatter.Deserialize)} code.");
+                if (mem.Position < mem.Length) throw new Exception($"Not all data has been read from stream and deserialized! Length of data taken is {mem.Position} bytes, but message size was {mem.Length} bytes. Check corresponding {nameof(Formatter.Deserialize)} code.");
             }
         }
 

@@ -14,6 +14,9 @@ namespace HHSwarm.Native.GameResources
     [Serializable]
     public class HavenResource1 : IHavenResourceReceiver
     {
+        /// <remarks>
+        /// https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1528
+        /// </remarks>
         internal static readonly byte[] FILE_SIGNATURE = Encoding.ASCII.GetBytes("Haven Resource 1");
 
 

@@ -21,6 +21,15 @@ namespace HHSwarm.Native.GameResources
 
         }
 
+        /// <summary>
+        /// Декодирует очередной ресурс указанного типа из потока.
+        /// </summary>
+        /// <remarks>
+        /// Вызывает декодировщик для указанного типа. Фактически - занимается только диспетчеризацией; непосредственное декодирование производится в отдельных методах.
+        /// </remarks>
+        /// <param name="reader">Поток данных файла ресурсов</param>
+        /// <param name="resourceType">Тип ресурса</param>
+        /// <param name="receiver">После декодирования, будет вызван метод, соответствующий типу ресурса</param>
         protected override void Deserialize(BinaryReader reader, string resourceType, IHavenResourceReceiver receiver)
         {
             string trace_dump_message = $"Deserialized game resource of type {resourceType}";
@@ -29,6 +38,7 @@ namespace HHSwarm.Native.GameResources
             {
                 case "code":
                     // @LayerName("code")
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1162
                     {
                         JavaClassResourceLayer resource;
                         Deserialize(reader, out resource);
@@ -37,6 +47,7 @@ namespace HHSwarm.Native.GameResources
                     break;
                 case "codeentry":
                     // @LayerName("codeentry")
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1239
                     {
                         JavaClassEntryResourceLayer resource;
                         Deserialize(reader, out resource);
@@ -45,6 +56,7 @@ namespace HHSwarm.Native.GameResources
                     break;
                 case "tex":
                     // @Resource.LayerName("tex")
+                    // https://github.com/dolda2000/hafen-client/blob/394aeed6e3ebbfa64d679a7d4fdda364a982d8bb/src/haven/TexR.java#L38
                     {
                         TextureResourceLayer resource;
                         Deserialize(reader, out resource);
@@ -53,6 +65,7 @@ namespace HHSwarm.Native.GameResources
                     break;
                 case "mat2":
                     // @Resource.LayerName("mat2")
+                    // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/Material.java#L349
                     {
                         MaterialResourceLayer2 resource;
                         Deserialize(reader, out resource);
@@ -61,6 +74,7 @@ namespace HHSwarm.Native.GameResources
                     break;
                 case "boneoff":
                     // @Resource.LayerName("boneoff")
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Skeleton.java#L1040
                     {
                         BoneOffsetResourceLayer resource;
                         Deserialize(reader, out resource);
@@ -69,6 +83,7 @@ namespace HHSwarm.Native.GameResources
                     break;
                 case "mesh":
                     // @Resource.LayerName("mesh")
+                    // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/FastMesh.java#L220
                     {
                         MeshResourceLayer resource;
                         Deserialize(reader, out resource);
@@ -85,6 +100,7 @@ namespace HHSwarm.Native.GameResources
                     break;
                 case "vbuf2":
                     // @Resource.LayerName("vbuf2")
+                    // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/VertexBuf.java#L412
                     {
                         VertexBufferResourceLayer2 resource;
                         Deserialize(reader, out resource);
@@ -93,14 +109,25 @@ namespace HHSwarm.Native.GameResources
                     break;
                 case "skel":
                     // @Resource.LayerName("skel")
+                    // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/Skeleton.java#L552
                     {
                         SkeletonResourceLayer resource;
                         Deserialize(reader, out resource);
                         receiver.Receive(resource);
                     }
                     break;
+                case "skan":
+                    // @Resource.LayerName("skan")
+                    // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/Skeleton.java#L886
+                    {
+                        SkeletonAnimationResourceLayer resource;
+                        Deserialize(reader, out resource);
+                        receiver.Receive(resource);
+                    }
+                    break;
                 case "neg":
                     // @LayerName("neg")
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1036
                     {
                         NegResourceLayer resource;
                         Deserialize(reader, out resource);
@@ -109,6 +136,7 @@ namespace HHSwarm.Native.GameResources
                     break;
                 case "image":
                     // @LayerName("image")
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L902
                     {
                         ImageResourceLayer resource;
                         Deserialize(reader, out resource);
@@ -117,52 +145,67 @@ namespace HHSwarm.Native.GameResources
                     break;
                 case "rlink":
                     // @Resource.LayerName("rlink")
+                    // https://github.com/dolda2000/hafen-client/blob/f96bf3fd3ebe4391f794448def33f04289c93137/src/haven/RenderLink.java#L203
                     {
                         RenderLinkResourceLayer resource;
                         Deserialize(reader, out resource);
                         receiver.Receive(resource);
                     }
                     break;
-                case "skan":
-                    // @Resource.LayerName("skan"), class ResPose
-                    {
-                        SkeletonAnimationResourceLayer resource;
-                        Deserialize(reader, out resource);
-                        receiver.Receive(resource);
-                    }
+                case "anim":
+                    // @LayerName("anim")
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1058
+                    // TODO: @LayerName("anim")
+                    throw new NotImplementedException();
                     break;
-                case "obst":
-                    // 
-                    {
-                        // TODO: Implement next! - "obst"
-                        //byte[] data = reader.ReadBytes((int)(reader.BaseStream.Length - reader.BaseStream.Position));
-                        int length = reader.ReadInt32();
-                        byte[] data = reader.ReadBytes(length);
-                        File.WriteAllBytes(@"C:\Temp\HHSwarm-ExtractedResources\-" + nameof(HavenResource1Formatter) + "-" + resourceType + DateTime.Now.Ticks + ".bin", data);
-
-                        Debugger.Break();
-                    }
+                case "pagina":
+                    // @LayerName("pagina")
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1086
+                    // TODO: @LayerName("pagina")
+                    throw new NotImplementedException();
+                    break;
+                case "action":
+                    // @LayerName("action")
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1097
+                    // TODO: @LayerName("action")
+                    throw new NotImplementedException();
+                    break;
+                case "font":
+                    // @LayerName("font")
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1454
+                    // TODO: @LayerName("font")
+                    throw new NotImplementedException();
+                    break;
+                case "audio":
+                    // @LayerName("audio")
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1389
+                    // TODO: @LayerName("audio")
+                    throw new NotImplementedException();
+                    break;
+                case "audio2":
+                    // @LayerName("audio2")
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1419
+                    // TODO: @LayerName("audio2")
+                    throw new NotImplementedException();
+                    break;
+                case "midi":
+                    // @LayerName("midi")
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1437
+                    // TODO: @LayerName("midi")
+                    throw new NotImplementedException();
                     break;
                 case "manim":
-                    // @Resource.LayerName("manim"), MeshAnim
+                    // @Resource.LayerName("manim")
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/MeshAnim.java#L378
                     {
                         MeshAnimationResourceLayer resource;
                         Deserialize(reader, out resource);
                         receiver.Receive(resource);
                     }
                     break;
-                case "plparts":
-                    {
-                        // TODO: Implement next! - "plparts"
-                        int length = reader.ReadInt32();
-                        byte[] data = reader.ReadBytes(length);
-                        File.WriteAllBytes(@"C:\Temp\HHSwarm-ExtractedResources\-" + nameof(HavenResource1Formatter) + "-" + resourceType + DateTime.Now.Ticks + ".bin", data);
-
-                        Debugger.Break();
-                    }
-                    break;
                 case "tooltip":
                     // @LayerName("tooltip")
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1025
                     {
                         TooltipResourceLayer resource;
                         Deserialize(reader, out resource);
@@ -171,11 +214,54 @@ namespace HHSwarm.Native.GameResources
                     break;
                 case "light":
                     // @Resource.LayerName("light")
+                    // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/Light.java#L237
                     {
                         LightResourceLayer resource;
                         Deserialize(reader, out resource);
                         receiver.Receive(resource);
                     }
+                    break;
+                case "tileset":
+                    // @Resource.LayerName("tileset")
+                    // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/Tileset.java#L235
+                    // TODO: @Resource.LayerName("tileset")
+                    throw new NotImplementedException();
+                    break;
+                case "tileset2":
+                    // @Resource.LayerName("tileset2")
+                    // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/Tileset.java#L35
+                    // TODO: @Resource.LayerName("tileset2")
+                    throw new NotImplementedException();
+                    break;
+                case "tile":
+                    // @Resource.LayerName("tile")
+                    // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/Tileset.java#L47
+                    // TODO: @Resource.LayerName("tile")
+                    throw new NotImplementedException();
+                    break;
+                case "slink":
+                    // @Resource.LayerName("slink")
+                    // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/SpriteLink.java#L33
+                    // TODO: @Resource.LayerName("slink")
+                    throw new NotImplementedException();
+                    break;
+                case "clamb":
+                    // @Resource.LayerName("clamb")
+                    // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/ClipAmbiance.java#L257
+                    // TODO: @Resource.LayerName("clamb")
+                    throw new NotImplementedException();
+                    break;
+                case "overlay":
+                    // @Resource.LayerName("overlay")
+                    // https://github.com/dolda2000/hafen-client/blob/c254d17c9b05363eff99c9e9baa529b2be779f4b/src/haven/MCache.java#L101
+                    // TODO: @Resource.LayerName("overlay")
+                    throw new NotImplementedException();
+                    break;
+                case "foodev":
+                    // @Resource.LayerName("foodev")
+                    // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L85
+                    // TODO: @Resource.LayerName("foodev")
+                    throw new NotImplementedException();
                     break;
                 default:
                     {
@@ -826,6 +912,7 @@ namespace HHSwarm.Native.GameResources
             });
         }
 
+        [Obsolete]
         protected void Deserialize(BinaryReader reader, out VertexBufferResourceLayer1 resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
