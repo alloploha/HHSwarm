@@ -151,10 +151,16 @@ namespace HHSwarm.Native.Protocols.Hafen
             }
         }
 
-        #region RMSG_NEWWDG
+        #region RMSG_NEWWDG        
         private void Relay_RMSG_NEWWDG_Received(RMSG_NEWWDG message)
         {
-            Relay_RMSG_NEWWDG_ReceivedAsync(message).WaitAsync((e) => { throw e; });
+            Relay_RMSG_NEWWDG_ReceivedAsync(message).WaitAsync((e) => 
+            {
+#if DEBUG
+                Debugger.Break();
+#endif
+                throw e;
+            });
         }
 
         private async Task Relay_RMSG_NEWWDG_ReceivedAsync(RMSG_NEWWDG message)
@@ -187,7 +193,7 @@ namespace HHSwarm.Native.Protocols.Hafen
                                     downImageResource: res[create_arguments.DownImageResourceName].Resource.Images.Single(),
 
                                     // https://github.com/dolda2000/hafen-client/blob/394a9d64bc732ed8c2eb6e5df1b57dd08b97c4d8/src/haven/IButton.java#L59
-                                    hoverImageResource: res[create_arguments.UpImageResourceName].Resource.Images.Single() 
+                                    hoverImageResource: res[create_arguments.UpImageResourceName].Resource.Images.Single()
                                 )
                         );
 
@@ -271,7 +277,7 @@ namespace HHSwarm.Native.Protocols.Hafen
                     // @RName("cnt")
                     // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/Widget.java#L59
                     // TODO: @RName("cnt")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "ccnt":
                     // @RName("ccnt")
@@ -294,13 +300,13 @@ namespace HHSwarm.Native.Protocols.Hafen
                     // @RName("fcnt")
                     // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/Widget.java#L80
                     // TODO: @RName("fcnt")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "acnt":
                     // @RName("acnt")
                     // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/Widget.java#L128
                     // TODO: @RName("acnt")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "gameui":
                     // @RName("gameui")
@@ -377,7 +383,7 @@ namespace HHSwarm.Native.Protocols.Hafen
                         EquiporyWidgetCreateArguments create_arguments;
                         WidgetArgumentsFormatter.Deserialize(new ArgumentsReader(message.CreateArguments), out create_arguments);
                     }
-                    throw new NotImplementedException();
+                    //throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "inv":
                     // @RName("inv")
@@ -400,223 +406,302 @@ namespace HHSwarm.Native.Protocols.Hafen
                     // @RName("fmg")
                     // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/FightWnd.java#L693
                     // TODO: @RName("fmg")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "chr":
                     // @RName("chr")
                     // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1843
                     // TODO: @RName("chr")
-                    throw new NotImplementedException();
+                    {
+                        CharacterSheetWidgetCreateArguments create_arguments;
+                        WidgetArgumentsFormatter.Deserialize(new ArgumentsReader(message.CreateArguments), out create_arguments);
+
+                        NamedResourceList res = new NamedResourceList
+                        (
+                            create_arguments.ResourceName.Values.ToArray()
+                        //create_arguments.BaseAttributesImageResourceName,
+                        //create_arguments.BaseAttributesStrengthImageResourceName,
+                        //create_arguments.BaseAttributesAgilityImageResourceName,
+                        //create_arguments.BaseAttributesIntelligenceImageResourceName,
+                        //create_arguments.BaseAttributesConstitutionImageResourceName,
+                        //create_arguments.BaseAttributesPerceptionImageResourceName,
+                        //create_arguments.BaseAttributesCharismaImageResourceName,
+                        //create_arguments.BaseAttributesDexterityImageResourceName,
+                        //create_arguments.BaseAttributesWillImageResourceName,
+                        //create_arguments.BaseAttributesPsycheImageResourceName,
+
+                        //create_arguments.BaseAttributesButtonUpImageResourceName,
+                        //create_arguments.BaseAttributesButtonDownImageResourceName,                            
+
+                        //create_arguments.FoodEventPointsImageResourceName,
+                        //create_arguments.FoodMeterImageResourceName,
+                        //create_arguments.FoodSatuationsImageResourceName,
+                        //create_arguments.HungerLevelImageResourceName,
+                        //create_arguments.GlutMeterImageResourceName,
+
+                        //create_arguments.AbilitiesImageResourceName,
+                        //create_arguments.AbilitiesUnarmedImageResouceName,
+                        //create_arguments.AbilitiesMeleeImageResouceName,
+                        //create_arguments.AbilitiesRangedImageResouceName,
+                        //create_arguments.AbilitiesExploreImageResouceName,
+                        //create_arguments.AbilitiesStealthImageResouceName,
+                        //create_arguments.AbilitiesSewingImageResouceName,
+                        //create_arguments.AbilitiesSmithingImageResouceName,
+                        //create_arguments.AbilitiesMasonryImageResouceName,
+                        //create_arguments.AbilitiesCarpentryImageResouceName,
+                        //create_arguments.AbilitiesCookingImageResouceName,
+                        //create_arguments.AbilitiesFarmingImageResouceName,
+                        //create_arguments.AbilitiesSurviveImageResouceName,
+                        //create_arguments.AbilitiesLoreImageResouceName,
+
+                        //create_arguments.AbilitiesButtonAddImageResourceName,
+                        //create_arguments.AbilitiesButtonSubtractImageResourceName,
+                        //create_arguments.AbilitiesButtonUpImageResourceName,
+                        //create_arguments.AbilitiesButtonDownImageResourceName,
+
+                        //create_arguments.StudyReportImageResourceName,
+
+                        //create_arguments.LoreAndSkillsImageResourceName,
+                        //create_arguments.LoreAndSkillsButtonUpImageResourceName,
+                        //create_arguments.LoreAndSkillsButtonDownImageResourceName,                            
+
+                        //create_arguments.HealthAndWoundsImageResourceName,
+                        //create_arguments.HealthAndWoundsButtonUpImageResourceName,
+                        //create_arguments.HealthAndWoundsButtonDownImageResourceName,
+
+                        //create_arguments.QuestLogImageResourceName,
+                        //create_arguments.QuestLogButtonUpImageResourceName,
+                        //create_arguments.QuestLogButtonDownImageResourceName,
+
+                        //create_arguments.MartialArtsAndCombatSchoolsButtonUpImageResourceName,
+                        //create_arguments.MartialArtsAndCombatSchoolsButtonDownImageResourceName
+                        );
+
+                        await ProcessDelayed_RMSG_NEWWDG_Async
+                        (
+                            res,
+                            () => CreateCharacterSheetWidgetReceived?.Invoke
+                                (
+                                    widgetID: message.WidgetID,
+                                    parentWidgetID: message.ParentID,
+                                    addChildArgumentsDeserializer: WidgetArgumentsFormatter,
+                                    addChildArguments: message.AddChildArguments//,
+                                    //BaseAttributesImageResource: res[create_arguments.BaseAttributesImageResourceName].Resource.Images.Single(),
+                                    //BaseAttributesAgilityImageResource: res[create_arguments.BaseAttributesAgilityImageResourceName].Resource.Images.Single()
+                                )
+                        );
+                    }
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "av":
                     // @RName("av")
                     // https://github.com/dolda2000/hafen-client/blob/d61d2a6ff4a832f84e55069794578002d37b0ce1/src/haven/Avaview.java#L50
                     // TODO: @RName("av")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "buddy":
                     // @RName("buddy")
                     // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/BuddyWnd.java#L79
                     // TODO: @RName("buddy")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "grp":
                     // @RName("grp")
                     // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/BuddyWnd.java#L244
                     // TODO: @RName("grp")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "buff":
                     // @RName("buff")
                     // https://github.com/dolda2000/hafen-client/blob/d61d2a6ff4a832f84e55069794578002d37b0ce1/src/haven/Buff.java#L56
                     // TODO: @RName("buff")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "btn":
                     // @RName("btn")
                     // https://github.com/dolda2000/hafen-client/blob/394a9d64bc732ed8c2eb6e5df1b57dd08b97c4d8/src/haven/Button.java#L56
                     // TODO: @RName("btn")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "ltbtn":
                     // @RName("ltbtn")
                     // https://github.com/dolda2000/hafen-client/blob/394a9d64bc732ed8c2eb6e5df1b57dd08b97c4d8/src/haven/Button.java#L65
                     // TODO: @RName("ltbtn")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "wound":
                     // @RName("wound")
                     // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L895
                     // TODO: @RName("wound")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "quest":
                     // @RName("quest")
                     // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1383
                     // TODO: @RName("quest")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "schan":
                     // @RName("schan")
                     // https://github.com/dolda2000/hafen-client/blob/9dc7c1e7af3f1e3d49a7e2b42b6a11ec8c463af8/src/haven/ChatUI.java#L845
                     // TODO: @RName("schan")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "mchat":
                     // @RName("mchat")
                     // https://github.com/dolda2000/hafen-client/blob/9dc7c1e7af3f1e3d49a7e2b42b6a11ec8c463af8/src/haven/ChatUI.java#L852
                     // TODO: @RName("mchat")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "pchat":
                     // @RName("pchat")
                     // https://github.com/dolda2000/hafen-client/blob/9dc7c1e7af3f1e3d49a7e2b42b6a11ec8c463af8/src/haven/ChatUI.java#L860
                     // TODO: @RName("pchat")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "pmchat":
                     // @RName("pmchat")
                     // https://github.com/dolda2000/hafen-client/blob/9dc7c1e7af3f1e3d49a7e2b42b6a11ec8c463af8/src/haven/ChatUI.java#L866
                     // TODO: @RName("pmchat")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "chat":
                     // @RName("chat")
                     // https://github.com/dolda2000/hafen-client/blob/d61d2a6ff4a832f84e55069794578002d37b0ce1/src/haven/Chatwindow.java#L33
                     // TODO: @RName("chat")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "chk":
                     // @RName("chk")
                     // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/CheckBox.java#L38
                     // TODO: @RName("chk")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "fsess":
                     // @RName("fsess")
                     // https://github.com/dolda2000/hafen-client/blob/ccfca692c16d0df250bdd5f6762d5461999a9ab6/src/haven/Fightsess.java#L62
                     // TODO: @RName("fsess")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "frv":
                     // @RName("frv")
                     // https://github.com/dolda2000/hafen-client/blob/394a9d64bc732ed8c2eb6e5df1b57dd08b97c4d8/src/haven/Fightview.java#L104
                     // TODO: @RName("frv")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "sm":
                     // @RName("sm")
                     // https://github.com/dolda2000/hafen-client/blob/974366a68c0e61ee175a678d574f863705eac352/src/haven/FlowerMenu.java#L43
                     // TODO: @RName("sm")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "give":
                     // @RName("give")
                     // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/GiveButton.java#L37
                     // TODO: @RName("give")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "ichk":
                     // @RName("ichk")
                     // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/ICheckBox.java#L36
                     // TODO: @RName("ichk")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "im":
                     // @RName("im")
                     // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/IMeter.java#L39
                     // TODO: @RName("im")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "isbox":
                     // @RName("isbox")
                     // https://github.com/dolda2000/hafen-client/blob/d61d2a6ff4a832f84e55069794578002d37b0ce1/src/haven/ISBox.java#L39
                     // TODO: @RName("isbox")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "lbl":
                     // @RName("lbl")
                     // https://github.com/dolda2000/hafen-client/blob/d61d2a6ff4a832f84e55069794578002d37b0ce1/src/haven/Label.java#L37
                     // TODO: @RName("lbl")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "make":
                     // @RName("make")
                     // https://github.com/dolda2000/hafen-client/blob/9eb9b50b2a0cc7029f8f74211d53d9be108a21f9/src/haven/Makewindow.java#L47
                     // TODO: @RName("make")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "mapmod":
                     // @RName("mapmod")
                     // https://github.com/dolda2000/hafen-client/blob/4432d2be09a90eea48d370af6268b13227c146df/src/haven/MapMod.java#L43
                     // TODO: @RName("mapmod")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "scm":
                     // @RName("scm")
                     // https://github.com/dolda2000/hafen-client/blob/25968122bbebc26462e0046ae4b8a0cb480dc65d/src/haven/MenuGrid.java#L50
                     // TODO: @RName("scm")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "npc":
                     // @RName("npc")
                     // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/NpcChat.java#L36
                     // TODO: @RName("npc")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "pv":
                     // @RName("pv")
                     // https://github.com/dolda2000/hafen-client/blob/d61d2a6ff4a832f84e55069794578002d37b0ce1/src/haven/Partyview.java#L42
                     // TODO: @RName("pv")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "prog":
                     // @RName("prog")
                     // https://github.com/dolda2000/hafen-client/blob/d61d2a6ff4a832f84e55069794578002d37b0ce1/src/haven/Progress.java#L32
                     // TODO: @RName("prog")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "scr":
                     // @RName("scr")
                     // https://github.com/dolda2000/hafen-client/blob/394a9d64bc732ed8c2eb6e5df1b57dd08b97c4d8/src/haven/Scrollport.java#L33
                     // TODO: @RName("scr")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "sess":
                     // @RName("sess")
                     // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/SessWidget.java#L35
                     // TODO: @RName("sess")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "speedget":
                     // @RName("speedget")
                     // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/Speedget.java#L54
                     // TODO: @RName("speedget")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "text":
                     // @RName("text")
                     // https://github.com/dolda2000/hafen-client/blob/bc52d6cc6df621b6854614c736ed64193deb7dfc/src/haven/TextEntry.java#L52
                     // TODO: @RName("text")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "log":
                     // @RName("log")
                     // https://github.com/dolda2000/hafen-client/blob/d61d2a6ff4a832f84e55069794578002d37b0ce1/src/haven/Textlog.java#L43
                     // TODO: @RName("log")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "vm":
                     // @RName("vm")
                     // https://github.com/dolda2000/hafen-client/blob/d61d2a6ff4a832f84e55069794578002d37b0ce1/src/haven/VMeter.java#L37
                     // TODO: @RName("vm")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 case "wnd":
                     // @RName("wnd")
                     // https://github.com/dolda2000/hafen-client/blob/ccfca692c16d0df250bdd5f6762d5461999a9ab6/src/haven/Window.java#L84
                     // TODO: @RName("wnd")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@RName(\"{message.Type}\")");
                     break;
                 default:
                     {
@@ -704,7 +789,13 @@ namespace HHSwarm.Native.Protocols.Hafen
         #region RMSG_RESID
         private void Relay_RMSG_RESID_Received(RMSG_RESID message)
         {
-            Relay_RMSG_RESID_ReceivedAsync(message).WaitAsync((e) => { throw e; });
+            Relay_RMSG_RESID_ReceivedAsync(message).WaitAsync((e) => 
+            {
+#if DEBUG
+                Debugger.Break();
+#endif
+                throw e;
+            });
         }
 
         private async Task Relay_RMSG_RESID_ReceivedAsync(RMSG_RESID message)
@@ -731,13 +822,13 @@ namespace HHSwarm.Native.Protocols.Hafen
         {
             if (!LocalResources.Contains(resourceName))
             {
-                Trace.TraceInformation($"Local resources CACHE MISSED for '{resourceName}' version {resourceVersion}");
+                Trace.TraceDebug($"Local resources CACHE MISSED for '{resourceName}' version {resourceVersion}");
                 HavenResource1 resource = await RemoteResources.GetResourceAsync(resourceName);
 
                 if (resourceVersion > resource.Version)
                     Trace.TraceWarning($"Received resource '{resourceName}' version {resource.Version} is less than requested one {resourceVersion}!");
 
-                Trace.TraceInformation($"Resource '{resourceName}' loaded from {nameof(RemoteResources)}");
+                Trace.TraceDebug($"Resource '{resourceName}' loaded from {nameof(RemoteResources)}");
 
                 await LocalResources.AddAsync(resourceName, resource);
             }
@@ -769,6 +860,9 @@ namespace HHSwarm.Native.Protocols.Hafen
 
         public delegate void CreateInventoryWidgetDelegate(ushort widgetID, ushort parentWidgetID, IAddChildArgumentsDeserializer addChildArgumentsDeserializer, object[] addChildArguments, Coord2i size);
         public event CreateInventoryWidgetDelegate CreateInventoryWidgetReceived;
+
+        public delegate void CreateCharacterSheetWidgetDelegate(ushort widgetID, ushort parentWidgetID, IAddChildArgumentsDeserializer addChildArgumentsDeserializer, object[] addChildArguments);
+        public event CreateCharacterSheetWidgetDelegate CreateCharacterSheetWidgetReceived;
 
         #region CharactersListWidget RMSG_WDGMSG arguments parsing
         public void Parse_CharactersListWidget_Add_Message(object[] messageArguments, Action<string, object, object> Result)

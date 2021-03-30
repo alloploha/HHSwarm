@@ -83,8 +83,10 @@
     <Compile Include="GameResources\TooltipResourceLayer.cs" />
     <Compile Include="GameResources\VertexBufferResourceLayer1.cs" />
     <Compile Include="GameResources\VertexBufferResourceLayer_Bone.cs" />
+    <Compile Include="Protocols\Hafen\IMessageBinaryReader.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\AdvancedRelativePositionComputer.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\ButtonWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\Hafen\WidgetMessageArguments\CharacterSheetWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\CharactersListWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\CreateEmptyCenteredWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\EquiporyWidgetCreateArguments.cs" />

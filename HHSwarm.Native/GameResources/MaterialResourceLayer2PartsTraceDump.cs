@@ -22,61 +22,61 @@ namespace HHSwarm.Native.GameResources
 
         public void Receive(MaterialResourceLayer2.ColorsPart part)
         {
-            Trace.Dump(TraceEventType.Information, Message, part);
+            Trace.Dump(TraceEventType.Verbose, Message, part);
             Receiver.Receive(part);
         }
 
         public void Receive(MaterialResourceLayer2.TexPalPart part)
         {
-            Trace.Dump(TraceEventType.Information, Message, part);
+            Trace.Dump(TraceEventType.Verbose, Message, part);
             Receiver.Receive(part);
         }
 
         public void Receive(MaterialResourceLayer2.LightPart part)
         {
-            Trace.Dump(TraceEventType.Information, Message, part);
+            Trace.Dump(TraceEventType.Verbose, Message, part);
             Receiver.Receive(part);
         }
 
         public void Receive(MaterialResourceLayer2.OrderPart part)
         {
-            Trace.Dump(TraceEventType.Information, Message, part);
+            Trace.Dump(TraceEventType.Verbose, Message, part);
             Receiver.Receive(part);
         }
 
         public void Receive(MaterialResourceLayer2.TexPart part)
         {
-            Trace.Dump(TraceEventType.Information, Message, part);
+            Trace.Dump(TraceEventType.Verbose, Message, part);
             Receiver.Receive(part);
         }
 
         public void Receive(MaterialResourceLayer2.CelShadePart part)
         {
-            Trace.Dump(TraceEventType.Information, Message, part);
+            Trace.Dump(TraceEventType.Verbose, Message, part);
             Receiver.Receive(part);
         }
 
         public void Receive(MaterialResourceLayer2.MaterialLink part)
         {
-            Trace.Dump(TraceEventType.Information, Message, part);
+            Trace.Dump(TraceEventType.Verbose, Message, part);
             Receiver.Receive(part);
         }
 
         public void Receive(MaterialResourceLayer2.OverTex part)
         {
-            Trace.Dump(TraceEventType.Information, Message, part);
+            Trace.Dump(TraceEventType.Verbose, Message, part);
             Receiver.Receive(part);
         }
 
         public void Receive(MaterialResourceLayer2.ColorState part)
         {
-            Trace.Dump(TraceEventType.Information, Message, part);
+            Trace.Dump(TraceEventType.Verbose, Message, part);
             Receiver.Receive(part);
         }
 
         public void Receive(MaterialResourceLayer2.TexAnim part)
         {
-            Trace.Dump(TraceEventType.Information, Message, part);
+            Trace.Dump(TraceEventType.Verbose, Message, part);
             Receiver.Receive(part);
         }
     }

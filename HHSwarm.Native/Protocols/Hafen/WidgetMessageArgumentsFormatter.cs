@@ -342,5 +342,175 @@ namespace HHSwarm.Native.Protocols.Hafen
         {
             return DeserializeWidgetRelativePosition(computer, addChildArguments, parentWidgetID, widgetID);
         }
+
+        public void Deserialize(ArgumentsReader reader, out CharacterSheetWidgetCreateArguments result)
+        {
+            result = new CharacterSheetWidgetCreateArguments();
+
+            // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1862
+            result.ResourceName[CharacterSheetWidgetCreateArguments.RESOURCE.BaseAttributesImage] = "gfx/hud/chr/tips/base";
+
+            {
+                // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1862
+                //BaseAttributesImageResourceName = "gfx/hud/chr/tips/base",
+                //ResourceName[CharacterSheetWidgetCreateArguments.RESOURCE.BaseAttributesImage] = "gfx/hud/chr/tips/base"//,
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1865
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L434
+                //BaseAttributesStrengthImageResourceName = "gfx/hud/chr/" + "str",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1866
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L434
+                //BaseAttributesAgilityImageResourceName = "gfx/hud/chr/" + "agi",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1867
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L434
+                //BaseAttributesIntelligenceImageResourceName = "gfx/hud/chr/" + "int",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1868
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L434
+                //BaseAttributesConstitutionImageResourceName = "gfx/hud/chr/" + "con",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1869
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L434
+                //BaseAttributesPerceptionImageResourceName = "gfx/hud/chr/" + "prc",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1870
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L434
+                //BaseAttributesCharismaImageResourceName = "gfx/hud/chr/" + "csm",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1871
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L434
+                //BaseAttributesDexterityImageResourceName = "gfx/hud/chr/" + "dex",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1872
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L434
+                //BaseAttributesWillImageResourceName = "gfx/hud/chr/" + "wil",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1873
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L434
+                //BaseAttributesPsycheImageResourceName = "gfx/hud/chr/" + "psy",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L2106
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L2083
+                //BaseAttributesButtonUpImageResourceName = "gfx/hud/chr/" + "battr" + "u",
+                //BaseAttributesButtonDownImageResourceName = "gfx/hud/chr/" + "battr" + "d",
+
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1875
+                //FoodEventPointsImageResourceName = "gfx/hud/chr/tips/fep",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1876
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L76
+                //FoodMeterImageResourceName = "gfx/hud/chr/foodm",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1878
+                //FoodSatuationsImageResourceName = "gfx/hud/chr/tips/constip",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1881
+                //HungerLevelImageResourceName = "gfx/hud/chr/tips/hunger",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1882
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L246
+                //GlutMeterImageResourceName = "gfx/hud/chr/glutm",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1888
+                //AbilitiesImageResourceName = "gfx/hud/chr/tips/sattr",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1891
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L491
+                //AbilitiesUnarmedImageResouceName = "gfx/hud/chr/" + "unarmed",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1892
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L491
+                //AbilitiesMeleeImageResouceName = "gfx/hud/chr/" + "melee",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1893
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L491
+                //AbilitiesRangedImageResouceName = "gfx/hud/chr/" + "ranged",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1894
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L491
+                //AbilitiesExploreImageResouceName = "gfx/hud/chr/" + "explore",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1895
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L491
+                //AbilitiesStealthImageResouceName = "gfx/hud/chr/" + "stealth",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1896
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L491
+                //AbilitiesSewingImageResouceName = "gfx/hud/chr/" + "sewing",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1897
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L491
+                //AbilitiesSmithingImageResouceName = "gfx/hud/chr/" + "smithing",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1898
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L491
+                //AbilitiesMasonryImageResouceName = "gfx/hud/chr/" + "masonry",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1899
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L491
+                //AbilitiesCarpentryImageResouceName = "gfx/hud/chr/" + "carpentry",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1900
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L491
+                //AbilitiesCookingImageResouceName = "gfx/hud/chr/" + "cooking",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1901
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L491
+                //AbilitiesFarmingImageResouceName = "gfx/hud/chr/" + "farming",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1902
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L491
+                //AbilitiesSurviveImageResouceName = "gfx/hud/chr/" + "survive",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1903
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L491
+                //AbilitiesLoreImageResouceName = "gfx/hud/chr/" + "lore",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L497
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L500
+                //AbilitiesButtonAddImageResourceName = "gfx/hud/buttons/add",
+                //AbilitiesButtonSubtractImageResourceName = "gfx/hud/buttons/sub",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L2107
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L2083
+                //AbilitiesButtonUpImageResourceName = "gfx/hud/chr/" + "sattr" + "u",
+                //AbilitiesButtonDownImageResourceName = "gfx/hud/chr/" + "sattr" + "d",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1906
+                //StudyReportImageResourceName = "gfx/hud/chr/tips/study",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L1936
+                //LoreAndSkillsImageResourceName = "gfx/hud/chr/tips/skills",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L2108
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L2083
+                //LoreAndSkillsButtonUpImageResourceName = "gfx/hud/chr/" + "skill" + "u",
+                //LoreAndSkillsButtonDownImageResourceName = "gfx/hud/chr/" + "skill" + "d",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L2109
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L2083
+                //MartialArtsAndCombatSchoolsButtonUpImageResourceName = "gfx/hud/chr/" + "fgt" + "u",
+                //MartialArtsAndCombatSchoolsButtonDownImageResourceName = "gfx/hud/chr/" + "fgt" + "d",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L2019
+                //HealthAndWoundsImageResourceName = "gfx/hud/chr/tips/wounds",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L2110
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L2083
+                //HealthAndWoundsButtonUpImageResourceName = "gfx/hud/chr/" + "wound" + "u",
+                //HealthAndWoundsButtonDownImageResourceName = "gfx/hud/chr/" + "wound" + "d",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L2043
+                //QuestLogImageResourceName = "gfx/hud/chr/tips/quests",
+
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L2111
+                //// https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L2083
+                //QuestLogButtonUpImageResourceName = "gfx/hud/chr/" + "quest" + "u",
+                //QuestLogButtonDownImageResourceName = "gfx/hud/chr/" + "quest" + "d"
+            };
+        }
     }
 }

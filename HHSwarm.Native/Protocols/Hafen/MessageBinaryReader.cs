@@ -1,14 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HHSwarm.Native.Common;
+using HHSwarm.Native.Shared;
+using HHSwarm.Native.GameResources;
 
 namespace HHSwarm.Native.Protocols.Hafen
 {
-    public class MessageBinaryReader : BinaryReader, IDisposable
+    public class MessageBinaryReader : BinaryReader, IDisposable, IMessageBinaryReader
     {
+        public long Position
+        {
+            get => BaseStream.Position;
+            set => BaseStream.Position = value;
+        }
+
+        public long Length => BaseStream.Length;
+
         private bool BigEndian = false;
 
         private void Initialize(bool bigEndian)
@@ -31,17 +43,34 @@ namespace HHSwarm.Native.Protocols.Hafen
             Initialize(bigEndian);
         }
 
-        public override string ReadString()
+        /// <summary>
+        /// Считывает 'C-style' строку из потока.
+        /// (это когда длина не указывается в начале, а отмечается ноликом '\0')
+        /// Так же останавливается если достиг указанный в <paramref name="maxLength"/> лимит длины. Такое надо если строковый ресурс был последним в потоке - завершающий ноль не всегда присутствует.
+        /// Рекомендуется использовать этот метод вместо <see cref="ReadString()"/> во избежание проблем с неправильно заполненным потоком.
+        /// </summary>
+        /// <param name="maxLength">Максимальная длина данных строки, в байтах.</param>
+        /// <returns></returns>
+        public string ReadString(int maxLength)
         {
-            List<char> str = new List<char>();
+            maxLength = Math.Min(maxLength, (int)(Length - Position)); // коррекция на случай если была указана большая константа "с запасом"
+            long maxPosition = Position + maxLength; // неизвестно в какой кодировке (длины) символы, поэтому учитываем только байты
+
+            StringBuilder str = new StringBuilder();
             char c;
-            while ('\0' != (c = base.ReadChar())) str.Add(c);
-            return new string(str.ToArray());
+            while (Position < maxPosition && '\0' != (c = base.ReadChar())) str.Append(c);
+            return str.ToString();
+        }
+
+        /// <inheritdoc/>
+        public override string ReadString()
+        {            
+            return ReadString((int)(Length - Position)); // предохранитель на крайний случай если завершающий ноль '\0' отсутствует
         }
 
         public override byte[] ReadBytes(int count)
         {
-            return base.ReadBytes(Math.Min(count, (int)(base.BaseStream.Length - base.BaseStream.Position)));
+            return base.ReadBytes(Math.Min(count, (int)(Length - Position)));
         }
 
         public override ushort ReadUInt16()
@@ -72,6 +101,106 @@ namespace HHSwarm.Native.Protocols.Hafen
         public override long ReadInt64()
         {
             return BigEndian ? this.ReadInt64BigEndian() : base.ReadInt64();
+        }
+
+        public ushort ReadUInt16BigEndian()
+        {
+            return ((BinaryReader)this).ReadUInt16BigEndian();
+        }
+
+        public short ReadInt16BigEndian()
+        {
+            return ((BinaryReader)this).ReadInt16BigEndian();
+        }
+
+        public uint ReadUInt32BigEndian()
+        {
+            return ((BinaryReader)this).ReadUInt32BigEndian();
+        }
+
+        public int ReadInt32BigEndian()
+        {
+            return ((BinaryReader)this).ReadInt32BigEndian();
+        }
+
+        public ulong ReadUInt64BigEndian()
+        {
+            return ((BinaryReader)this).ReadUInt64BigEndian();
+        }
+
+        public long ReadInt64BigEndian()
+        {
+            return ((BinaryReader)this).ReadInt64BigEndian();
+        }
+
+        public Color ReadColor()
+        {
+            return ((BinaryReader)this).ReadColor();
+        }
+
+        public Coord2i ReadCoord2i()
+        {
+            return ((BinaryReader)this).ReadCoord2i();
+        }
+
+        public Coord2f ReadCoord2f()
+        {
+            return ((BinaryReader)this).ReadCoord2f();
+        }
+
+        public Coord2d ReadCoord2d()
+        {
+            return ((BinaryReader)this).ReadCoord2d();
+        }
+
+        public Coord3i ReadCoord3i()
+        {
+            return ((BinaryReader)this).ReadCoord3i();
+        }
+
+        public Coord3f ReadCoord3f()
+        {
+            return ((BinaryReader)this).ReadCoord3f();
+        }
+
+        public Coord3d ReadCoord3d()
+        {
+            return ((BinaryReader)this).ReadCoord3d();
+        }
+
+        public double ReadDouble20bit()
+        {
+            return ((BinaryReader)this).ReadDouble20bit();
+        }
+
+        public float ReadSingle16bit()
+        {
+            return ((BinaryReader)this).ReadSingle16bit();
+        }
+
+        public IEnumerable<object> ReadList()
+        {
+            return ((BinaryReader)this).ReadList();
+        }
+
+        public Coord3f ReadCoord3f32bit()
+        {
+            return ((BinaryReader)this).ReadCoord3f32bit();
+        }
+
+        public Coord3f ReadCoord3f20bit()
+        {
+            return ((BinaryReader)this).ReadCoord3f20bit();
+        }
+
+        public Color ReadColor20bit()
+        {
+            return ((BinaryReader)this).ReadColor20bit();
+        }
+
+        public Coord3f ReadCoord3f16bit()
+        {
+            return ((BinaryReader)this).ReadCoord3f16bit();
         }
     }
 }

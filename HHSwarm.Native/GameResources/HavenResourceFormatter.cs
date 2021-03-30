@@ -1,4 +1,5 @@
 ﻿using HHSwarm.Native.Common;
+using HHSwarm.Native.Protocols.Hafen;
 using HHSwarm.Native.Shared;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace HHSwarm.Native.GameResources
         /// </summary>
         /// <param name="reader">Источник двоичных данных в формате файла ресурсов.</param>
         /// <param name="receiver">Объект, методы которого будут вызываться каждый раз когда очередной ресурс успешно декодирован.</param>
-        public void Deserialize(BinaryReader reader, IHavenResourceReceiver receiver)
+        public void Deserialize(IMessageBinaryReader reader, IHavenResourceReceiver receiver)
         {
             byte[] signature = reader.ReadBytes(FILE_SIGNATURE.Length);
 
@@ -45,7 +46,7 @@ namespace HHSwarm.Native.GameResources
             do
             {
                 // тип ресурса в рассматриваемом слое
-                string type = reader.ReadString();
+                string type = reader.ReadString((int)(reader.Length - reader.Position));
 
 #if DEBUG
                 if (receiver is ITraceMessageCanBeChanged)
@@ -56,10 +57,10 @@ namespace HHSwarm.Native.GameResources
 #endif
 
                 Deserialize(reader, type, receiver);
-            } while (reader.BaseStream.Position < reader.BaseStream.Length);
+            } while (reader.Position < reader.Length);
         }
 
-        protected abstract void Deserialize(BinaryReader reader, string resourceType, IHavenResourceReceiver receiver);
+        protected abstract void Deserialize(IMessageBinaryReader reader, string resourceType, IHavenResourceReceiver receiver);
 
         /// <summary>
         /// Считывает очередной слой из ресурса (через <paramref name="reader"/>) и передаёт его на раскодирование в <paramref name="Extract"/>.
@@ -68,12 +69,12 @@ namespace HHSwarm.Native.GameResources
         /// 1st argument is stream end position. Do not read outside this boundary!
         /// </param>
         /// <returns>Декодированный ресурс</returns>
-        protected TResource ExtractResourceFromLayer<TResource>(BinaryReader reader, Func<long, TResource> Extract) where TResource : ResourceLayer
+        protected TResource ExtractResourceFromLayer<TResource>(IMessageBinaryReader reader, Func<long, TResource> Extract) where TResource : ResourceLayer
         {
             // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1539
             int layer_data_length = reader.ReadInt32();
 
-            long position_before_layer = reader.BaseStream.Position;
+            long position_before_layer = reader.Position;
 
             try
             {
@@ -81,8 +82,8 @@ namespace HHSwarm.Native.GameResources
 
                 Debug.Assert(resource != null, "Resource Extract function must return resource object!");
 
-                if (reader.BaseStream.Position != position_before_layer + layer_data_length)
-                    throw new Exception($"Not all data has beed read from stream and deserialized for {resource.GetType().Name}! Length of data taken is {reader.BaseStream.Position - position_before_layer} bytes, but message size was {layer_data_length} bytes. Check corresponding {nameof(HavenResourceFormatter.Deserialize)} code.");
+                if (reader.Position != position_before_layer + layer_data_length)
+                    throw new Exception($"Not all data has beed read from stream and deserialized for {resource.GetType().Name}! Length of data taken is {reader.Position - position_before_layer} bytes, but message size was {layer_data_length} bytes. Check corresponding {nameof(HavenResourceFormatter.Deserialize)} code.");
 
                 return resource;
             }
@@ -90,7 +91,7 @@ namespace HHSwarm.Native.GameResources
             {
                 // вне зависимости от корректности работы с потоком функции Extract, продвигаем указатель ровно на следующий слой
                 // это позволяет избежать лавины ошибок из-за избытка или недостатка извлечённых из потока данных
-                reader.BaseStream.Position = position_before_layer + layer_data_length;
+                reader.Position = position_before_layer + layer_data_length;
             }
         }
     }

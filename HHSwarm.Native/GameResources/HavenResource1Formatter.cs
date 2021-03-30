@@ -30,7 +30,7 @@ namespace HHSwarm.Native.GameResources
         /// <param name="reader">Поток данных файла ресурсов</param>
         /// <param name="resourceType">Тип ресурса</param>
         /// <param name="receiver">После декодирования, будет вызван метод, соответствующий типу ресурса</param>
-        protected override void Deserialize(BinaryReader reader, string resourceType, IHavenResourceReceiver receiver)
+        protected override void Deserialize(IMessageBinaryReader reader, string resourceType, IHavenResourceReceiver receiver)
         {
             string trace_dump_message = $"Deserialized game resource of type {resourceType}";
 
@@ -156,43 +156,43 @@ namespace HHSwarm.Native.GameResources
                     // @LayerName("anim")
                     // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1058
                     // TODO: @LayerName("anim")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@LayerName(\"{resourceType}\")");
                     break;
                 case "pagina":
                     // @LayerName("pagina")
                     // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1086
                     // TODO: @LayerName("pagina")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@LayerName(\"{resourceType}\")");
                     break;
                 case "action":
                     // @LayerName("action")
                     // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1097
                     // TODO: @LayerName("action")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@LayerName(\"{resourceType}\")");
                     break;
                 case "font":
                     // @LayerName("font")
                     // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1454
                     // TODO: @LayerName("font")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@LayerName(\"{resourceType}\")");
                     break;
                 case "audio":
                     // @LayerName("audio")
                     // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1389
                     // TODO: @LayerName("audio")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@LayerName(\"{resourceType}\")");
                     break;
                 case "audio2":
                     // @LayerName("audio2")
                     // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1419
                     // TODO: @LayerName("audio2")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@LayerName(\"{resourceType}\")");
                     break;
                 case "midi":
                     // @LayerName("midi")
                     // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1437
                     // TODO: @LayerName("midi")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@LayerName(\"{resourceType}\")");
                     break;
                 case "manim":
                     // @Resource.LayerName("manim")
@@ -225,70 +225,77 @@ namespace HHSwarm.Native.GameResources
                     // @Resource.LayerName("tileset")
                     // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/Tileset.java#L235
                     // TODO: @Resource.LayerName("tileset")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@Resource.LayerName(\"{resourceType}\")");
                     break;
                 case "tileset2":
                     // @Resource.LayerName("tileset2")
                     // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/Tileset.java#L35
                     // TODO: @Resource.LayerName("tileset2")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@Resource.LayerName(\"{resourceType}\")");
                     break;
                 case "tile":
                     // @Resource.LayerName("tile")
                     // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/Tileset.java#L47
                     // TODO: @Resource.LayerName("tile")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@Resource.LayerName(\"{resourceType}\")");
                     break;
                 case "slink":
                     // @Resource.LayerName("slink")
                     // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/SpriteLink.java#L33
                     // TODO: @Resource.LayerName("slink")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@Resource.LayerName(\"{resourceType}\")");
                     break;
                 case "clamb":
                     // @Resource.LayerName("clamb")
                     // https://github.com/dolda2000/hafen-client/blob/f85b82305e06f850c924d3309de68eedbd9209dd/src/haven/ClipAmbiance.java#L257
                     // TODO: @Resource.LayerName("clamb")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@Resource.LayerName(\"{resourceType}\")");
                     break;
                 case "overlay":
                     // @Resource.LayerName("overlay")
                     // https://github.com/dolda2000/hafen-client/blob/c254d17c9b05363eff99c9e9baa529b2be779f4b/src/haven/MCache.java#L101
                     // TODO: @Resource.LayerName("overlay")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@Resource.LayerName(\"{resourceType}\")");
                     break;
                 case "foodev":
                     // @Resource.LayerName("foodev")
+                    // Food Event
                     // https://github.com/dolda2000/hafen-client/blob/f72eff8c3a3a5e22da71c45ceea1ceebd43a68e0/src/haven/CharWnd.java#L85
                     // TODO: @Resource.LayerName("foodev")
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"@Resource.LayerName(\"{resourceType}\")");
+                    break;
+                case "obst":
+                    {
+                        //byte[] remainder = reader.ReadBytes((int)(reader.BaseStream.Length - reader.BaseStream.Position));
+                        Trace.TraceWarning("Resource layer '{0}' received. No original client code exists for such object. Deprecated?", resourceType);
+                    }
                     break;
                 default:
                     {
 #if DEBUG
                         Debugger.Break();
-                        byte[] remainder = reader.ReadBytes((int)(reader.BaseStream.Length - reader.BaseStream.Position));
+                        byte[] remainder = reader.ReadBytes((int)(reader.Length - reader.Position));
 #endif
                         throw new NotImplementedException($"Unexpected resource type '{resourceType}'!");
                     }
             }
         }
 
-        protected void Deserialize(BinaryReader reader, out JavaClassResourceLayer resource)
+        protected void Deserialize(IMessageBinaryReader reader, out JavaClassResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
                 JavaClassResourceLayer result = new JavaClassResourceLayer()
                 {
-                    Name = reader.ReadString(),
-                    Code = reader.ReadBytes((int)(nextLayerPosition - reader.BaseStream.Position))
+                    Name = reader.ReadString((int)(nextLayerPosition - reader.Position)),
+                    Code = reader.ReadBytes((int)(nextLayerPosition - reader.Position))
                 };
 
                 return result;
             });
         }
 
-        protected void Deserialize(BinaryReader reader, out JavaClassEntryResourceLayer resource)
+        protected void Deserialize(IMessageBinaryReader reader, out JavaClassEntryResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
@@ -307,8 +314,8 @@ namespace HHSwarm.Native.GameResources
                                 {
                                     var item = new JavaClassEntryResourceLayer.ClassFactory()
                                     {
-                                        BaseClassFactoryPublishedName = reader.ReadString(),
-                                        ClassFactoryName = reader.ReadString()
+                                        BaseClassFactoryPublishedName = reader.ReadString((int)(nextLayerPosition - reader.Position)),
+                                        ClassFactoryName = reader.ReadString((int)(nextLayerPosition - reader.Position))
                                     };
 
                                     stop = String.IsNullOrEmpty(item.BaseClassFactoryPublishedName);
@@ -317,7 +324,7 @@ namespace HHSwarm.Native.GameResources
                                     {
                                         result.PublishedEntries.Add(item);
                                     }
-                                } while (!stop && reader.BaseStream.Position < nextLayerPosition);
+                                } while (!stop && reader.Position < nextLayerPosition);
                             }
                             break;
                         case JavaClassEntryResourceLayer.TYPE.ClassNameAndVersion:
@@ -327,7 +334,7 @@ namespace HHSwarm.Native.GameResources
                                 {
                                     var item = new JavaClassEntryResourceLayer.LoadName()
                                     {
-                                        Name = reader.ReadString()
+                                        Name = reader.ReadString((int)(nextLayerPosition - reader.Position))
                                     };
 
                                     stop = String.IsNullOrEmpty(item.Name);
@@ -339,19 +346,19 @@ namespace HHSwarm.Native.GameResources
                                         result.ToLoad.Add(item);
                                     }
 
-                                } while (!stop && reader.BaseStream.Position < nextLayerPosition);
+                                } while (!stop && reader.Position < nextLayerPosition);
                             }
                             break;
                         default:
                             throw new NotImplementedException($"Unexpected Class Entry Point type {type}!");
                     }
-                } while (reader.BaseStream.Position < nextLayerPosition);
+                } while (reader.Position < nextLayerPosition);
 
                 return result;
             });
         }
 
-        protected void Deserialize(BinaryReader reader, out TextureResourceLayer resource)
+        protected void Deserialize(IMessageBinaryReader reader, out TextureResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
@@ -409,7 +416,7 @@ namespace HHSwarm.Native.GameResources
                             throw new NotImplementedException($"Unexpected Texture Resource record type {type}!");
                     }
 
-                } while (reader.BaseStream.Position < nextLayerPosition);
+                } while (reader.Position < nextLayerPosition);
 
                 if (result.MipmapGeneratorType == Graphics.MipmapGenerator.TYPE.Default)
                     result.MipmapGeneratorType = Graphics.MipmapGenerator.TYPE.Average;
@@ -418,7 +425,7 @@ namespace HHSwarm.Native.GameResources
             });
         }
 
-        protected void Deserialize(BinaryReader reader, out MaterialResourceLayer2 resource)
+        protected void Deserialize(IMessageBinaryReader reader, out MaterialResourceLayer2 resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
@@ -431,7 +438,7 @@ namespace HHSwarm.Native.GameResources
 
                 do
                 {
-                    string material_part_name = reader.ReadString();
+                    string material_part_name = reader.ReadString((int)(nextLayerPosition - reader.Position));
 
 #if DEBUG
                     string trace_dump_message = $"Deserialized material (ID: {result.MaterialID}) part of type {material_part_name}";
@@ -549,7 +556,7 @@ namespace HHSwarm.Native.GameResources
                                 }
                         }
                     }
-                } while (reader.BaseStream.Position < nextLayerPosition);
+                } while (reader.Position < nextLayerPosition);
 
                 return result;
             });
@@ -783,13 +790,13 @@ namespace HHSwarm.Native.GameResources
             };
         }
 
-        protected void Deserialize(BinaryReader reader, out BoneOffsetResourceLayer resource)
+        protected void Deserialize(IMessageBinaryReader reader, out BoneOffsetResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
                 BoneOffsetResourceLayer result = new BoneOffsetResourceLayer()
                 {
-                    Name = reader.ReadString()
+                    Name = reader.ReadString((int)(nextLayerPosition - reader.Position))
                 };
 
                 do
@@ -829,7 +836,7 @@ namespace HHSwarm.Native.GameResources
                             {
                                 var command = new BoneOffsetResourceLayer.Bonetrans()
                                 {
-                                    BoneName = reader.ReadString()
+                                    BoneName = reader.ReadString((int)(nextLayerPosition - reader.Position))
                                 };
                                 Trace.Dump(TraceEventType.Verbose, trace_dump_message, command);
                                 result.Commands.Add(command);
@@ -842,8 +849,8 @@ namespace HHSwarm.Native.GameResources
                                     RefX = reader.ReadDouble20bit(),
                                     RefY = reader.ReadDouble20bit(),
                                     RefZ = reader.ReadDouble20bit(),
-                                    OriginBoneName = reader.ReadString(),
-                                    TargetBoneName = reader.ReadString()
+                                    OriginBoneName = reader.ReadString((int)(nextLayerPosition - reader.Position)),
+                                    TargetBoneName = reader.ReadString((int)(nextLayerPosition - reader.Position))
                                 };
                                 Trace.Dump(TraceEventType.Verbose, trace_dump_message, command);
                                 result.Commands.Add(command);
@@ -853,13 +860,13 @@ namespace HHSwarm.Native.GameResources
                             throw new NotImplementedException($"Unexpected Bone Offset command {command_type}!");
                     }
 
-                } while (reader.BaseStream.Position < nextLayerPosition);
+                } while (reader.Position < nextLayerPosition);
 
                 return result;
             });
         }
 
-        protected void Deserialize(BinaryReader reader, out MeshResourceLayer resource)
+        protected void Deserialize(IMessageBinaryReader reader, out MeshResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
@@ -889,15 +896,15 @@ namespace HHSwarm.Native.GameResources
                     bool stop = false;
                     do
                     {
-                        string key = reader.ReadString();
+                        string key = reader.ReadString((int)(nextLayerPosition - reader.Position));
                         stop = String.IsNullOrEmpty(key);
 
                         if (!stop)
                         {
-                            string value = reader.ReadString();
+                            string value = reader.ReadString((int)(nextLayerPosition - reader.Position));
                             result.Rdat.Add(key, value);
                         }
-                    } while (!stop && reader.BaseStream.Position < nextLayerPosition);
+                    } while (!stop && reader.Position < nextLayerPosition);
                 }
 
                 for (int i = 0; i < number_of_items; i++)
@@ -913,7 +920,7 @@ namespace HHSwarm.Native.GameResources
         }
 
         [Obsolete]
-        protected void Deserialize(BinaryReader reader, out VertexBufferResourceLayer1 resource)
+        protected void Deserialize(IMessageBinaryReader reader, out VertexBufferResourceLayer1 resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
@@ -925,7 +932,7 @@ namespace HHSwarm.Native.GameResources
                 {
                 };
 
-                while (reader.BaseStream.Position < nextLayerPosition)
+                while (reader.Position < nextLayerPosition)
                 {
                     VertexBufferResourceLayer1.ArrayType array_type = (VertexBufferResourceLayer1.ArrayType)reader.ReadByte(); // 'id'
 
@@ -964,7 +971,7 @@ namespace HHSwarm.Native.GameResources
             });
         }
 
-        protected void Deserialize(BinaryReader reader, out VertexBufferResourceLayer2 resource)
+        protected void Deserialize(IMessageBinaryReader reader, out VertexBufferResourceLayer2 resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
@@ -984,16 +991,16 @@ namespace HHSwarm.Native.GameResources
 
                 ushort number_of_items = reader.ReadUInt16(); // 'num'
 
-                while (reader.BaseStream.Position < nextLayerPosition)
+                while (reader.Position < nextLayerPosition)
                 {
-                    string array_name = reader.ReadString(); // 'nm'
+                    string array_name = reader.ReadString((int)(nextLayerPosition - reader.Position)); // 'nm'
 
                     int? array_data_length = null;
 
                     if (result.Version >= 1)
                         array_data_length = reader.ReadInt32();
 
-                    long position_before_array = reader.BaseStream.Position;
+                    long position_before_array = reader.Position;
 
                     Debug.WriteLine($"Deserializing vertex array '{array_name}', number of items to extract = {number_of_items}...", Trace.Name);
 
@@ -1061,14 +1068,14 @@ namespace HHSwarm.Native.GameResources
 
                     if (array_data_length.HasValue)
                     {
-                        if (reader.BaseStream.Position > position_before_array + array_data_length.Value)
-                            throw new Exception($"Excess data has beed read from stream and deserialized {nameof(VertexBufferResourceLayer2)} vertex array name {array_name}! Length of data taken is {reader.BaseStream.Position - position_before_array} bytes, but declared array size was {array_data_length} bytes. Check corresponding {nameof(HavenResourceFormatter.Deserialize)} code.");
+                        if (reader.Position > position_before_array + array_data_length.Value)
+                            throw new Exception($"Excess data has beed read from stream and deserialized {nameof(VertexBufferResourceLayer2)} vertex array name {array_name}! Length of data taken is {reader.Position - position_before_array} bytes, but declared array size was {array_data_length} bytes. Check corresponding {nameof(HavenResourceFormatter.Deserialize)} code.");
 
-                        if (reader.BaseStream.Position < position_before_array + array_data_length.Value)
+                        if (reader.Position < position_before_array + array_data_length.Value)
                         {
-                            Trace.TraceError($"Not all data has beed read from stream and deserialized for {nameof(VertexBufferResourceLayer2)} vertex array name {array_name}! Length of data taken is {reader.BaseStream.Position - position_before_array} bytes, but declared array size was {array_data_length} bytes. Check corresponding {nameof(HavenResourceFormatter.Deserialize)} code.");
+                            Trace.TraceError($"Not all data has beed read from stream and deserialized for {nameof(VertexBufferResourceLayer2)} vertex array name {array_name}! Length of data taken is {reader.Position - position_before_array} bytes, but declared array size was {array_data_length} bytes. Check corresponding {nameof(HavenResourceFormatter.Deserialize)} code.");
                             Debugger.Break();
-                            reader.BaseStream.Position = position_before_array + array_data_length.Value;
+                            reader.Position = position_before_array + array_data_length.Value;
                         }
                     }
                 }
@@ -1078,18 +1085,18 @@ namespace HHSwarm.Native.GameResources
         }
 
         /// <param name="numberOfItemsInArray">'num', 'nv'</param>
-        private float[,] ReadVertexBufferResource1ArrayOfSingle(BinaryReader reader, byte numberOfArrayDimensions, ushort numberOfItemsInArray)
+        private float[,] ReadVertexBufferResource1ArrayOfSingle(IMessageBinaryReader reader, byte numberOfArrayDimensions, ushort numberOfItemsInArray)
         {
             return ReadVertexBufferArray<float>(reader, numberOfArrayDimensions, numberOfItemsInArray, (r) => (float)r.ReadDouble20bit());
         }
 
         /// <param name="numberOfItemsInArray">'num', 'nv'</param>
-        private float[,] ReadVertexBufferResource2ArrayOfSingle(BinaryReader reader, byte numberOfArrayDimensions, ushort numberOfItemsInArray)
+        private float[,] ReadVertexBufferResource2ArrayOfSingle(IMessageBinaryReader reader, byte numberOfArrayDimensions, ushort numberOfItemsInArray)
         {
             return ReadVertexBufferArray<float>(reader, numberOfArrayDimensions, numberOfItemsInArray, (r) => r.ReadSingle());
         }
 
-        private T[,] ReadVertexBufferArray<T>(BinaryReader reader, byte numberOfArrayDimensions, ushort numberOfItemsInArray, Func<BinaryReader, T> ReadValue)
+        private T[,] ReadVertexBufferArray<T>(IMessageBinaryReader reader, byte numberOfArrayDimensions, ushort numberOfItemsInArray, Func<IMessageBinaryReader, T> ReadValue)
         {
             T[,] result = new T[numberOfItemsInArray, numberOfArrayDimensions];
 
@@ -1105,19 +1112,19 @@ namespace HHSwarm.Native.GameResources
         }
 
         /// <param name="numberOfItemsInArray">'num', 'nv'</param>
-        private VertexBufferResourceLayer_Bone[] ReadVertexBufferResource1ArrayOfBones(BinaryReader reader, ushort numberOfItemsInArray)
+        private VertexBufferResourceLayer_Bone[] ReadVertexBufferResource1ArrayOfBones(IMessageBinaryReader reader, ushort numberOfItemsInArray)
         {
             return ReadVertexBufferBones(reader, numberOfItemsInArray, (r) => (float)r.ReadDouble20bit());
         }
 
         /// <param name="numberOfItemsInArray">'num', 'nv'</param>
-        private VertexBufferResourceLayer_Bone[] ReadVertexBufferResource2ArrayOfBones(BinaryReader reader, ushort numberOfItemsInArray)
+        private VertexBufferResourceLayer_Bone[] ReadVertexBufferResource2ArrayOfBones(IMessageBinaryReader reader, ushort numberOfItemsInArray)
         {
             return ReadVertexBufferBones(reader, numberOfItemsInArray, (r) => (float)r.ReadSingle());
         }
 
         /// <param name="num">numberOfItemsInArray</param>
-        private VertexBufferResourceLayer_Bone[] ReadVertexBufferBones(BinaryReader reader, ushort num, Func<BinaryReader, float> ReadWeightValue)
+        private VertexBufferResourceLayer_Bone[] ReadVertexBufferBones(IMessageBinaryReader reader, ushort num, Func<IMessageBinaryReader, float> ReadWeightValue)
         {
             List<VertexBufferResourceLayer_Bone> result = new List<VertexBufferResourceLayer_Bone>();
 
@@ -1135,7 +1142,7 @@ namespace HHSwarm.Native.GameResources
             // bone_index
             int bidx = 0; // 'bidx' = a Bone InDeX
 
-            for (string bone_name = reader.ReadString(); !String.IsNullOrEmpty(bone_name); bone_name = reader.ReadString(), bidx++) // read bone name, stop when bone name is empty, compute bone index
+            for (string bone_name = reader.ReadString((int)(reader.Length - reader.Position)); !String.IsNullOrEmpty(bone_name); bone_name = reader.ReadString((int)(reader.Length - reader.Position)), bidx++) // read bone name, stop when bone name is empty, compute bone index
             {
                 VertexBufferResourceLayer_Bone bone = new VertexBufferResourceLayer_Bone()
                 {
@@ -1187,7 +1194,7 @@ namespace HHSwarm.Native.GameResources
             return result.ToArray();
         }
 
-        protected void Deserialize(BinaryReader reader, out SkeletonResourceLayer resource)
+        protected void Deserialize(IMessageBinaryReader reader, out SkeletonResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
@@ -1199,21 +1206,21 @@ namespace HHSwarm.Native.GameResources
                 {
                     SkeletonResourceLayer.Bone bone = new SkeletonResourceLayer.Bone()
                     {
-                        Name = reader.ReadString(),
+                        Name = reader.ReadString((int)(nextLayerPosition - reader.Position)),
                         Position = new Coord3d(x: reader.ReadDouble20bit(), y: reader.ReadDouble20bit(), z: reader.ReadDouble20bit()),
                         RotationAxis = new Coord3d(x: reader.ReadDouble20bit(), y: reader.ReadDouble20bit(), z: reader.ReadDouble20bit()),
                         RotationAngle = reader.ReadDouble20bit(),
-                        ParentBoneName = reader.ReadString()
+                        ParentBoneName = reader.ReadString((int)(nextLayerPosition - reader.Position))
                     };
                     Trace.Dump(TraceEventType.Verbose, trace_dump_message, bone);
                     result.Bones.Add(bone);
-                } while (reader.BaseStream.Position < nextLayerPosition);
+                } while (reader.Position < nextLayerPosition);
 
                 return result;
             });
         }
 
-        protected void Deserialize(BinaryReader reader, out NegResourceLayer resource)
+        protected void Deserialize(IMessageBinaryReader reader, out NegResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
@@ -1242,7 +1249,7 @@ namespace HHSwarm.Native.GameResources
             });
         }
 
-        protected void Deserialize(BinaryReader reader, out ImageResourceLayer resource)
+        protected void Deserialize(IMessageBinaryReader reader, out ImageResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
@@ -1253,14 +1260,14 @@ namespace HHSwarm.Native.GameResources
                     Flags = (ImageResourceLayer.FLAGS)reader.ReadByte(),
                     ID = reader.ReadInt16(),
                     O = new Point(x: reader.ReadInt16(), y: reader.ReadInt16()),
-                    Image = reader.ReadBytes((int)(nextLayerPosition - reader.BaseStream.Position))
+                    Image = reader.ReadBytes((int)(nextLayerPosition - reader.Position))
                 };
 
                 return result;
             });
         }
 
-        protected void Deserialize(BinaryReader reader, out RenderLinkResourceLayer resource)
+        protected void Deserialize(IMessageBinaryReader reader, out RenderLinkResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
@@ -1286,10 +1293,10 @@ namespace HHSwarm.Native.GameResources
                             result = new RenderLinkResourceLayer.MeshAndMaterial()
                             {
                                 LayerID = layer_id,
-                                MeshName = reader.ReadString(),
+                                MeshName = reader.ReadString((int)(nextLayerPosition - reader.Position)),
                                 MeshVersion = reader.ReadUInt16(),
                                 MeshID = reader.ReadInt16(),
-                                MaterialName = reader.ReadString(),
+                                MaterialName = reader.ReadString((int)(nextLayerPosition - reader.Position)),
                                 MaterialVersion = reader.ReadUInt16(),
                                 MaterialID = reader.ReadInt16()
                             };
@@ -1300,7 +1307,7 @@ namespace HHSwarm.Native.GameResources
                             result = new RenderLinkResourceLayer.AmbienceAudio()
                             {
                                 LayerID = layer_id,
-                                Name = reader.ReadString(),
+                                Name = reader.ReadString((int)(nextLayerPosition - reader.Position)),
                                 Version = reader.ReadUInt16()
                             };
                         }
@@ -1310,7 +1317,7 @@ namespace HHSwarm.Native.GameResources
                             result = new RenderLinkResourceLayer.Mesh()
                             {
                                 LayerID = layer_id,
-                                Name = reader.ReadString(),
+                                Name = reader.ReadString((int)(nextLayerPosition - reader.Position)),
                                 Version = reader.ReadUInt16(),
                                 MeshID = reader.ReadInt16()
                             };
@@ -1324,7 +1331,7 @@ namespace HHSwarm.Native.GameResources
             });
         }
 
-        protected void Deserialize(BinaryReader reader, out SkeletonAnimationResourceLayer resource)
+        protected void Deserialize(IMessageBinaryReader reader, out SkeletonAnimationResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
@@ -1343,9 +1350,9 @@ namespace HHSwarm.Native.GameResources
                     result.Speed = reader.ReadDouble20bit();
                 }
 
-                while (reader.BaseStream.Position < nextLayerPosition)
+                while (reader.Position < nextLayerPosition)
                 {
-                    string bone_name = reader.ReadString(); // 'bnm'
+                    string bone_name = reader.ReadString((int)(nextLayerPosition - reader.Position)); // 'bnm'
 
                     if (@"{ctl}".Equals(bone_name))
                     {
@@ -1364,7 +1371,7 @@ namespace HHSwarm.Native.GameResources
                                         var sprite = new SkeletonAnimationResourceLayer.Effect.Event.SpawnSprite()
                                         {
                                             Time = time,
-                                            ResourceName = reader.ReadString(),
+                                            ResourceName = reader.ReadString((int)(nextLayerPosition - reader.Position)),
                                             ResourceVersion = reader.ReadUInt16(),
                                             Data = reader.ReadBytes(reader.ReadByte())
                                         };
@@ -1377,7 +1384,7 @@ namespace HHSwarm.Native.GameResources
                                         var trigger = new SkeletonAnimationResourceLayer.Effect.Event.Trigger()
                                         {
                                             Time = time,
-                                            ID = reader.ReadString()
+                                            ID = reader.ReadString((int)(nextLayerPosition - reader.Position))
                                         };
 
                                         events.Add(trigger);
@@ -1433,7 +1440,7 @@ namespace HHSwarm.Native.GameResources
             });
         }
 
-        protected void Deserialize(BinaryReader reader, out MeshAnimationResourceLayer resource)
+        protected void Deserialize(IMessageBinaryReader reader, out MeshAnimationResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
@@ -1515,20 +1522,20 @@ namespace HHSwarm.Native.GameResources
             });
         }
 
-        protected void Deserialize(BinaryReader reader, out TooltipResourceLayer resource)
+        protected void Deserialize(IMessageBinaryReader reader, out TooltipResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
                 TooltipResourceLayer result = new TooltipResourceLayer()
                 {
-                    Text = reader.ReadString()
+                    Text = reader.ReadString((int)(nextLayerPosition - reader.Position))
                 };
 
                 return result;
             });
         }
 
-        protected void Deserialize(BinaryReader reader, out LightResourceLayer resource)
+        protected void Deserialize(IMessageBinaryReader reader, out LightResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
@@ -1540,7 +1547,7 @@ namespace HHSwarm.Native.GameResources
                     Specular = reader.ReadColor20bit()
                 };
 
-                while (reader.BaseStream.Position < nextLayerPosition)
+                while (reader.Position < nextLayerPosition)
                 {
                     LightResourceLayer.DataType type = (LightResourceLayer.DataType)reader.ReadByte(); // 't'
 
