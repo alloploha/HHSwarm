@@ -145,5 +145,12 @@ namespace HHSwarm.Native.GameResources
         {
             Lights.Add(resource);
         }
+
+        public readonly IList<PaginaResourceLayer> Paginae = new List<PaginaResourceLayer>();
+
+        public void Receive(PaginaResourceLayer resource)
+        {
+            Paginae.Add(resource);
+        }
     }
 }

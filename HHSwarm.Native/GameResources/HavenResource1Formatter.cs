@@ -161,8 +161,11 @@ namespace HHSwarm.Native.GameResources
                 case "pagina":
                     // @LayerName("pagina")
                     // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1086
-                    // TODO: @LayerName("pagina")
-                    throw new NotImplementedException($"@LayerName(\"{resourceType}\")");
+                    {
+                        PaginaResourceLayer resource;
+                        Deserialize(reader, out resource);
+                        receiver.Receive(resource);
+                    }
                     break;
                 case "action":
                     // @LayerName("action")
@@ -1326,6 +1329,20 @@ namespace HHSwarm.Native.GameResources
                     default:
                         throw new NotImplementedException($"Unexpected {nameof(RenderLinkResourceLayer)} type {type}!");
                 }
+
+                return result;
+            });
+        }
+
+        protected void Deserialize(IMessageBinaryReader reader, out PaginaResourceLayer resource)
+        {
+            resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
+            {
+                PaginaResourceLayer result = new PaginaResourceLayer()
+                {
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1091
+                    Text = reader.ReadString((int)(nextLayerPosition - reader.Position))
+                };
 
                 return result;
             });

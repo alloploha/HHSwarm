@@ -31,6 +31,11 @@ namespace System.IO
         /// <summary>
         /// Считывает 'C-style' строку из потока.
         /// </summary>
+        /// <example>
+        /// <code>
+        /// string text = reader.ReadString((int)(nextLayerPosition - reader.Position))
+        /// </code>
+        /// </example>
         /// <param name="maxLength">Максимальная длина данных строки, в байтах. Используется в случае если завершающий ноль не указан.</param>
         /// <returns></returns>
         string ReadString(int maxLength);

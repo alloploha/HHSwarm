@@ -78,6 +78,7 @@
     <Compile Include="GameResources\Message20bitColorExtensions.cs" />
     <Compile Include="GameResources\Message20bitCoord3fExtensions.cs" />
     <Compile Include="GameResources\Message32bitCoord3fExtensions.cs" />
+    <Compile Include="GameResources\PaginaResourceLayer.cs" />
     <Compile Include="GameResources\RenderLinkResourceLayer.cs" />
     <Compile Include="GameResources\SkeletonAnimationResourceLayer.cs" />
     <Compile Include="GameResources\TooltipResourceLayer.cs" />
