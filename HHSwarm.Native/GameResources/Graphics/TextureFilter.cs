@@ -8,6 +8,9 @@ namespace HHSwarm.Native.GameResources.Graphics
 {
     public abstract class TextureFilter
     {
+        /// <remarks>
+        /// https://github.com/dolda2000/hafen-client/blob/394aeed6e3ebbfa64d679a7d4fdda364a982d8bb/src/haven/TexR.java#L74-L80
+        /// </remarks>
         public enum TYPE : byte
         {
             NEAREST = 0,

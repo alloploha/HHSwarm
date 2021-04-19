@@ -155,11 +155,14 @@ namespace HHSwarm.Native.GameResources
                 case "anim":
                     // @LayerName("anim")
                     // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1058
-                    // TODO: @LayerName("anim")
-                    throw new NotImplementedException($"@LayerName(\"{resourceType}\")");
+                    {
+                        AnimationResourceLayer resource;
+                        Deserialize(reader, out resource);
+                        receiver.Receive(resource);
+                    }
                     break;
                 case "pagina":
-                    // @LayerName("pagina")
+                    // @LayerName("pagina"), A "page" of Command Buttons at the right bottom corner of the screen.
                     // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1086
                     {
                         PaginaResourceLayer resource;
@@ -168,10 +171,13 @@ namespace HHSwarm.Native.GameResources
                     }
                     break;
                 case "action":
-                    // @LayerName("action")
+                    // @LayerName("action"), Action Button
                     // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1097
-                    // TODO: @LayerName("action")
-                    throw new NotImplementedException($"@LayerName(\"{resourceType}\")");
+                    {
+                        ActionButtonResourceLayer resource;
+                        Deserialize(reader, out resource);
+                        receiver.Receive(resource);
+                    }
                     break;
                 case "font":
                     // @LayerName("font")
@@ -268,9 +274,24 @@ namespace HHSwarm.Native.GameResources
                     throw new NotImplementedException($"@Resource.LayerName(\"{resourceType}\")");
                     break;
                 case "obst":
+                    // TODO: ?Obstacles?
                     {
-                        //byte[] remainder = reader.ReadBytes((int)(reader.BaseStream.Length - reader.BaseStream.Position));
-                        Trace.TraceWarning("Resource layer '{0}' received. No original client code exists for such object. Deprecated?", resourceType);
+                        int size = reader.ReadInt32();
+                        byte[] remainder = reader.ReadBytes(size);
+                        Trace.TraceWarning("Resource layer '{0}' (length: {1}) received. No original client code exists for such object. Deprecated?", resourceType, reader.Length - reader.Position);
+#if DEBUG
+                        //File.WriteAllBytes(String.Format(@"C:\Temp\HHSwarm-ExtractedResources\obst-{0}", DateTime.Now.Millisecond), remainder);
+#endif
+                    }
+                    break;
+                case "src":
+                    // ?Preprocessed source code?
+                    {
+                        Trace.TraceWarning("Resource layer '{0}' (length: {1}) received. No original client code exists for such object. Deprecated?", resourceType, reader.Length - reader.Position);
+
+                        JavaSourceCodeResourceLayer resource;
+                        Deserialize(reader, out resource);
+                        receiver.Receive(resource);
                     }
                     break;
                 default:
@@ -282,6 +303,67 @@ namespace HHSwarm.Native.GameResources
                         throw new NotImplementedException($"Unexpected resource type '{resourceType}'!");
                     }
             }
+        }
+
+        private void Deserialize(IMessageBinaryReader reader, out JavaSourceCodeResourceLayer resource)
+        {
+            resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
+            {
+                JavaSourceCodeResourceLayer result = new JavaSourceCodeResourceLayer()
+                {
+                    N = reader.ReadByte(),
+                    FileName = reader.ReadString((int)(nextLayerPosition - reader.Position)),
+                    Text = reader.ReadBytes((int)(nextLayerPosition - reader.Position))
+                };
+
+                return result;
+            });
+        }
+
+        private void Deserialize(IMessageBinaryReader reader, out ActionButtonResourceLayer resource)
+        {
+            resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
+            {
+                // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1104-L1122
+                ActionButtonResourceLayer result = new ActionButtonResourceLayer()
+                {
+                    ParentResourceName = reader.ReadString((int)(nextLayerPosition - reader.Position)),
+                    ParentResourceVersion = reader.ReadUInt16(),
+                    Name = reader.ReadString((int)(nextLayerPosition - reader.Position)),
+                    PrerequisiteSkill = reader.ReadString((int)(nextLayerPosition - reader.Position)),
+                    HotKey = Convert.ToChar(reader.ReadUInt16()),
+                    ad = new string[reader.ReadUInt16()]
+                };
+
+                for (int i = 0; i < result.ad.Length; i++)
+                {
+                    result.ad[i] = reader.ReadString((int)(nextLayerPosition - reader.Position));
+                }
+
+                return result;
+            });
+        }
+
+        private void Deserialize(IMessageBinaryReader reader, out AnimationResourceLayer resource)
+        {
+            resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
+            {
+                // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1064-L1070
+                AnimationResourceLayer result = new AnimationResourceLayer()
+                {
+                    ID = reader.ReadInt16(),
+                    D = reader.ReadUInt16()
+                };
+
+                result.ImageID = new short[reader.ReadUInt16()];
+
+                for (int i = 0; i < result.ImageID.Length; i++)
+                {
+                    result.ImageID[i] = reader.ReadInt16();
+                }
+
+                return result;
+            });
         }
 
         protected void Deserialize(IMessageBinaryReader reader, out JavaClassResourceLayer resource)
@@ -361,6 +443,9 @@ namespace HHSwarm.Native.GameResources
             });
         }
 
+        /// <remarks>
+        /// https://github.com/dolda2000/hafen-client/blob/394aeed6e3ebbfa64d679a7d4fdda364a982d8bb/src/haven/TexR.java#L45
+        /// </remarks>
         protected void Deserialize(IMessageBinaryReader reader, out TextureResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
@@ -368,20 +453,24 @@ namespace HHSwarm.Native.GameResources
                 TextureResourceLayer result = new TextureResourceLayer()
                 {
                     TextureID = reader.ReadInt16(),
+
                     Offset = new System.Drawing.Point
                     (
                         reader.ReadUInt16(),
                         reader.ReadUInt16()
                     ),
+
                     Size = new System.Drawing.Size
                     (
                         reader.ReadUInt16(),
                         reader.ReadUInt16()
                     ),
+
                     MagFilterType = Graphics.TextureFilter.TYPE.LINEAR,
                     MinFilterType = Graphics.TextureFilter.TYPE.LINEAR
                 };
 
+                // https://github.com/dolda2000/hafen-client/blob/394aeed6e3ebbfa64d679a7d4fdda364a982d8bb/src/haven/TexR.java#L52
                 do
                 {
                     TextureResourceLayer.DATA_PART type = (TextureResourceLayer.DATA_PART)reader.ReadByte();
@@ -389,33 +478,43 @@ namespace HHSwarm.Native.GameResources
                     switch (type)
                     {
                         case TextureResourceLayer.DATA_PART.Image:
+                            // https://github.com/dolda2000/hafen-client/blob/394aeed6e3ebbfa64d679a7d4fdda364a982d8bb/src/haven/TexR.java#L55
                             {
                                 int length = reader.ReadInt32();
                                 result.Image = reader.ReadBytes(length);
                             }
                             break;
                         case TextureResourceLayer.DATA_PART.MipmapGeneratorType:
+                            // https://github.com/dolda2000/hafen-client/blob/394aeed6e3ebbfa64d679a7d4fdda364a982d8bb/src/haven/TexR.java#L58
                             {
                                 result.MipmapGeneratorType = (Graphics.MipmapGenerator.TYPE)reader.ReadByte();
+                                if (result.MipmapGeneratorType == Graphics.MipmapGenerator.TYPE.Default) result.MipmapGeneratorType = Graphics.MipmapGenerator.TYPE.Average;
                             }
                             break;
                         case TextureResourceLayer.DATA_PART.MagnificationFilter:
+                            // https://github.com/dolda2000/hafen-client/blob/394aeed6e3ebbfa64d679a7d4fdda364a982d8bb/src/haven/TexR.java#L70
                             {
                                 result.MagFilterType = (Graphics.TextureFilter.TYPE)reader.ReadByte();
                             }
                             break;
                         case TextureResourceLayer.DATA_PART.MinificationFilter:
+                            // https://github.com/dolda2000/hafen-client/blob/394aeed6e3ebbfa64d679a7d4fdda364a982d8bb/src/haven/TexR.java#L74-L80
                             {
                                 result.MinFilterType = (Graphics.TextureFilter.TYPE)reader.ReadByte();
                             }
                             break;
                         case TextureResourceLayer.DATA_PART.Mask:
+                            // https://github.com/dolda2000/hafen-client/blob/394aeed6e3ebbfa64d679a7d4fdda364a982d8bb/src/haven/TexR.java#L84
                             {
                                 int size = reader.ReadInt32();
                                 result.Mask = reader.ReadBytes(size);
                             }
                             break;
+                        case TextureResourceLayer.DATA_PART.LinearColorValues:
+                            /* Linear color values, not relevant right now */
+                            break;
                         default:
+                            // https://github.com/dolda2000/hafen-client/blob/394aeed6e3ebbfa64d679a7d4fdda364a982d8bb/src/haven/TexR.java#L90
                             throw new NotImplementedException($"Unexpected Texture Resource record type {type}!");
                     }
 
@@ -1223,17 +1322,25 @@ namespace HHSwarm.Native.GameResources
             });
         }
 
+        /// <remarks>
+        /// https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1041
+        /// </remarks>
         protected void Deserialize(IMessageBinaryReader reader, out NegResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
                 NegResourceLayer result = new NegResourceLayer()
                 {
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L794
                     CC = new Point(x: reader.ReadInt16(), y: reader.ReadInt16()),
+
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1044
                     EP = new Point[8][]
                 };
 
+                // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1043
                 byte[] skipped_bytes = reader.ReadBytes(12);
+
                 byte en = reader.ReadByte();
 
                 for (int i = 0; i < en; i++)
@@ -1252,6 +1359,9 @@ namespace HHSwarm.Native.GameResources
             });
         }
 
+        /// <remarks>
+        /// https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L915
+        /// </remarks>
         protected void Deserialize(IMessageBinaryReader reader, out ImageResourceLayer resource)
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
@@ -1263,6 +1373,9 @@ namespace HHSwarm.Native.GameResources
                     Flags = (ImageResourceLayer.FLAGS)reader.ReadByte(),
                     ID = reader.ReadInt16(),
                     O = new Point(x: reader.ReadInt16(), y: reader.ReadInt16()),
+
+                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L925-L943
+                    // TODO: *** NEXT
                     Image = reader.ReadBytes((int)(nextLayerPosition - reader.Position))
                 };
 

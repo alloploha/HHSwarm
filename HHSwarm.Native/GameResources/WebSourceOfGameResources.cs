@@ -37,9 +37,11 @@ namespace HHSwarm.Native.GameResources
             WebClient client = new WebClient();
             client.Headers.Add(HttpRequestHeader.UserAgent, UserAgent);
 
-            Trace.TraceInformation($"Downloading resource '{resourceName}' from network...");
+            string url = ResourcesBaseUri + $"{resourceName}.res";
 
-            byte[] data = await client.DownloadDataTaskAsync(ResourcesBaseUri + $"{resourceName}.res");
+            Trace.TraceInformation($"Downloading resource '{resourceName}' from '{url}'...");
+
+            byte[] data = await client.DownloadDataTaskAsync(url);
 
             Trace.TraceInformation($"Downloaded resource '{resourceName}', data length {data.Length} bytes.");
 
@@ -52,7 +54,7 @@ namespace HHSwarm.Native.GameResources
             string trace_dump_message = $"Deserialized game resource layer from '{resourceName}'";
             receiver = new HavenResourceTraceDump(trace_dump_message, result);
 #endif
-
+            
             using (MemoryStream mem = new MemoryStream(data))
             {
                 serializer.Deserialize(new MessageBinaryReader(mem, Encoding.UTF8), receiver);

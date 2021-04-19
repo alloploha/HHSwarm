@@ -10,9 +10,12 @@ namespace HHSwarm.Native.Protocols.Hafen.WidgetMessageArguments
     /// @RName("ibtn")
     /// https://github.com/dolda2000/hafen-client/blob/394a9d64bc732ed8c2eb6e5df1b57dd08b97c4d8/src/haven/IButton.java#L38
     /// </remarks>
-    class ButtonWidgetCreateArguments
+    class ButtonWidgetCreateArguments : ResourceNamesWidgetCreateArguments<ButtonWidgetCreateArguments.RESOURCE_NAME>
     {
-        public string UpImageResourceName;
-        public string DownImageResourceName;
+        public enum RESOURCE_NAME
+        {
+            UpImage,
+            DownImage
+        }
     }
 }

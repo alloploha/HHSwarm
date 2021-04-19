@@ -9,9 +9,9 @@ namespace HHSwarm.Native.Protocols.Hafen.WidgetMessageArguments
     /// <remarks>
     /// @RName("chr")
     /// </remarks>
-    class CharacterSheetWidgetCreateArguments
+    class CharacterSheetWidgetCreateArguments : ResourceNamesWidgetCreateArguments<CharacterSheetWidgetCreateArguments.RESOURCE_NAME>
     {
-        public enum RESOURCE
+        public enum RESOURCE_NAME
         {
             BaseAttributesImage, // 'battr'
             BaseAttributesStrengthImage, // 'str'
@@ -51,8 +51,10 @@ namespace HHSwarm.Native.Protocols.Hafen.WidgetMessageArguments
             AbilitiesSurviveImage,
             AbilitiesLoreImage,
 
-            AbilitiesButtonAddImage,
-            AbilitiesButtonSubtractImage,
+            AbilitiesButtonAddUpImage,
+            AbilitiesButtonAddDownImage,
+            AbilitiesButtonSubtractUpImage,
+            AbilitiesButtonSubtractDownImage,
             AbilitiesButtonUpImage,
             AbilitiesButtonDownImage,
 
@@ -77,74 +79,5 @@ namespace HHSwarm.Native.Protocols.Hafen.WidgetMessageArguments
             MartialArtsAndCombatSchoolsButtonUpImage,
             MartialArtsAndCombatSchoolsButtonDownImage
         }
-
-        public readonly Dictionary<RESOURCE, string> ResourceName = new Dictionary<RESOURCE, string>();
-
-        //public string BaseAttributesImageResourceName; // 'battr'
-
-        //public string BaseAttributesStrengthImageResourceName; // 'str'
-        //public string BaseAttributesAgilityImageResourceName; // 'agi'
-        //public string BaseAttributesIntelligenceImageResourceName; // 'int'
-        //public string BaseAttributesConstitutionImageResourceName; // 'con'
-        //public string BaseAttributesPerceptionImageResourceName; // 'prc'
-        //public string BaseAttributesCharismaImageResourceName; // 'csm'
-        //public string BaseAttributesDexterityImageResourceName; // 'dex'
-        //public string BaseAttributesWillImageResourceName; // 'wil'
-        //public string BaseAttributesPsycheImageResourceName; // 'psy'
-
-        //public string BaseAttributesButtonUpImageResourceName;
-        //public string BaseAttributesButtonDownImageResourceName;
-
-        //public string FoodEventPointsImageResourceName;
-        //public string FoodMeterImageResourceName;
-        //public string FoodSatuationsImageResourceName;
-        //public string HungerLevelImageResourceName;
-
-        ///// <summary>
-        ///// Food efficacy
-        ///// </summary>
-        //public string GlutMeterImageResourceName;
-
-        //public string AbilitiesImageResourceName;
-
-        //public string AbilitiesUnarmedImageResouceName;
-        //public string AbilitiesMeleeImageResouceName;
-        //public string AbilitiesRangedImageResouceName;
-        //public string AbilitiesExploreImageResouceName;
-        //public string AbilitiesStealthImageResouceName;
-        //public string AbilitiesSewingImageResouceName;
-        //public string AbilitiesSmithingImageResouceName;
-        //public string AbilitiesMasonryImageResouceName;
-        //public string AbilitiesCarpentryImageResouceName;
-        //public string AbilitiesCookingImageResouceName;
-        //public string AbilitiesFarmingImageResouceName;
-        //public string AbilitiesSurviveImageResouceName;
-        //public string AbilitiesLoreImageResouceName;
-
-        //public string AbilitiesButtonAddImageResourceName;
-        //public string AbilitiesButtonSubtractImageResourceName;
-        //public string AbilitiesButtonUpImageResourceName;
-        //public string AbilitiesButtonDownImageResourceName;
-
-        //public string StudyReportImageResourceName; // 'satr'
-
-        //// 'skill'
-        //public string LoreAndSkillsImageResourceName; 
-        //public string LoreAndSkillsButtonUpImageResourceName;
-        //public string LoreAndSkillsButtonDownImageResourceName;
-
-        //// 'wound'
-        //public string HealthAndWoundsImageResourceName; 
-        //public string HealthAndWoundsButtonUpImageResourceName;
-        //public string HealthAndWoundsButtonDownImageResourceName;
-
-        //// 'quest'
-        //public string QuestLogImageResourceName; 
-        //public string QuestLogButtonUpImageResourceName;
-        //public string QuestLogButtonDownImageResourceName;
-
-        //// 'fgt'
-        //public string MartialArtsAndCombatSchoolsButtonUpImageResourceName;
-        //public string MartialArtsAndCombatSchoolsButtonDownImageResourceName;
     }
 }

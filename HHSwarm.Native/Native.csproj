@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -69,6 +70,8 @@
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Extensions\TaskExtensions.cs" />
     <Compile Include="Extensions\TraceSourceExtensions.cs" />
+    <Compile Include="GameResources\ActionButtonResourceLayer.cs" />
+    <Compile Include="GameResources\AnimationResourceLayer.cs" />
     <Compile Include="GameResources\HavenResourceTraceDump.cs" />
     <Compile Include="GameResources\ITraceMessageCanBeChanged.cs" />
     <Compile Include="GameResources\LightResourceLayer.cs" />
@@ -81,23 +84,35 @@
     <Compile Include="GameResources\PaginaResourceLayer.cs" />
     <Compile Include="GameResources\RenderLinkResourceLayer.cs" />
     <Compile Include="GameResources\SkeletonAnimationResourceLayer.cs" />
+    <Compile Include="GameResources\JavaSourceCodeResourceLayer.cs" />
     <Compile Include="GameResources\TooltipResourceLayer.cs" />
     <Compile Include="GameResources\VertexBufferResourceLayer1.cs" />
     <Compile Include="GameResources\VertexBufferResourceLayer_Bone.cs" />
     <Compile Include="Protocols\Hafen\IMessageBinaryReader.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\AdvancedRelativePositionComputer.cs" />
+    <Compile Include="Protocols\Hafen\WidgetMessageArguments\BuddyWindowWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\ButtonWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\CharacterSheetWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\CharactersListWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\Hafen\WidgetMessageArguments\CommandsMenuWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\CreateEmptyCenteredWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\EquiporyWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\Hafen\WidgetMessageArguments\FightViewWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\Hafen\WidgetMessageArguments\FightWindowWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\GameUserInterfaceWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\Hafen\WidgetMessageArguments\GearboxWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\GitemWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\IAddChildArgumentsDeserializer.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\ImageWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\InventoryWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\MapViewWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\Hafen\WidgetMessageArguments\MultiChatWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\Hafen\WidgetMessageArguments\PartyViewWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\Hafen\WidgetMessageArguments\ProgressBarWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\Hafen\WidgetMessageArguments\QuestBoxWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\RelativePositionComputer.cs" />
+    <Compile Include="Protocols\Hafen\WidgetMessageArguments\ResourceNamesWidgetCreateArguments.cs" />
+    <Compile Include="Protocols\Hafen\WidgetMessageArguments\SimpleChatWidgetCreateArguments.cs" />
     <Compile Include="Protocols\Hafen\WidgetMessageArguments\WidgetCreateAddChildArguments.cs" />
     <Compile Include="Shared\Message16bitFloatExtensions.cs" />
     <Compile Include="WorldModel\Astronomy.cs" />

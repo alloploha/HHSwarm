@@ -145,12 +145,33 @@ namespace HHSwarm.Native.GameResources
         {
             Lights.Add(resource);
         }
-
+        
         public readonly IList<PaginaResourceLayer> Paginae = new List<PaginaResourceLayer>();
 
         public void Receive(PaginaResourceLayer resource)
         {
             Paginae.Add(resource);
+        }
+
+        public readonly IList<AnimationResourceLayer> Animations = new List<AnimationResourceLayer>();
+
+        public void Receive(AnimationResourceLayer resource)
+        {
+            Animations.Add(resource);
+        }
+
+        public readonly IList<ActionButtonResourceLayer> Actions = new List<ActionButtonResourceLayer>();
+
+        public void Receive(ActionButtonResourceLayer resource)
+        {
+            Actions.Add(resource);
+        }
+
+        public readonly IList<JavaSourceCodeResourceLayer> JavaSourceCode = new List<JavaSourceCodeResourceLayer>();
+
+        public void Receive(JavaSourceCodeResourceLayer resource)
+        {
+            JavaSourceCode.Add(resource);
         }
     }
 }

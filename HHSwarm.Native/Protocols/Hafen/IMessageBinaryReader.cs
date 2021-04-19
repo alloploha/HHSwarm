@@ -55,7 +55,15 @@ namespace System.IO
         Coord3i ReadCoord3i();
         Coord3f ReadCoord3f();
         Coord3d ReadCoord3d();
+
+        /// <summary>
+        /// <c>Message.uint8()</c>
+        /// </summary>
+        /// <remarks>
+        /// https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Message.java#L109
+        /// </remarks>
         byte ReadByte();
+
         int PeekChar();
         int Read();
         int Read(byte[] buffer, int index, int count);

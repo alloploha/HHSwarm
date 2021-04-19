@@ -9,19 +9,22 @@ namespace HHSwarm.Native.Protocols.Hafen.WidgetMessageArguments
     /// <summary>
     /// '@RName("charlist")'
     /// </summary>
-    class CharactersListWidgetCreateArguments
+    class CharactersListWidgetCreateArguments : ResourceNamesWidgetCreateArguments<CharactersListWidgetCreateArguments.RESOURCE_NAME>
     {
         /// <summary>
         /// 'height'
         /// </summary>
         public int Height;
 
-        public string BackgroundImageResourceName;
-        public string ScrollUpButtonUpImageResourceName;
-        public string ScrollUpButtonDownImageResourceName;
-        public string ScrollUpButtonHoverImageResourceName;
-        public string ScrollDownButtonUpImageResourceName;
-        public string ScrollDownButtonDownImageResourceName;
-        public string ScrollDownButtonHoverImageResourceName;
+        public enum RESOURCE_NAME
+        {
+            BackgroundImage,
+            ScrollUpButtonUpImage,
+            ScrollUpButtonDownImage,
+            ScrollUpButtonHoverImage,
+            ScrollDownButtonUpImage,
+            ScrollDownButtonDownImage,
+            ScrollDownButtonHoverImage
+        }
     }
 }
