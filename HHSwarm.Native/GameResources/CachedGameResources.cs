@@ -1,4 +1,4 @@
-﻿using HHSwarm.Native.Protocols.v17;
+﻿using HHSwarm.Native.Protocols.Hafen;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -36,7 +36,9 @@ namespace HHSwarm.Native.GameResources
             chars.AddRange(Path.GetInvalidPathChars());
             chars.Add('.');
 
-            InvalidFilePathCharsRegex = new Regex("[" + chars.Distinct().ToArray().Select(c => Regex.Escape(c.ToString())) + "]", RegexOptions.Compiled | RegexOptions.Singleline);
+            IEnumerable<string> escaped_chars = chars.Distinct().ToArray().Select(c => Regex.Escape(c.ToString()));
+
+            InvalidFilePathCharsRegex = new Regex("[" + string.Concat(escaped_chars) + "]", RegexOptions.Compiled | RegexOptions.Singleline);
         }
 
         private string Key(string resourceName)
@@ -53,7 +55,12 @@ namespace HHSwarm.Native.GameResources
         {
             Type type = typeof(CachedGameResources);
             Version version = type.Assembly.GetName().Version;
-            return Path.Combine($"{nameof(CachedGameResources)}-{version.Major}.{version.Minor}.{version.Build}.{version.Revision}", String.Format("{0}.bin", FileNameFromResourceName(resourceName)));
+
+            string result = Path.Combine($"{nameof(CachedGameResources)}-{version.Major}.{version.Minor}.{version.Build}.{version.Revision}", String.Format("{0}.bin", FileNameFromResourceName(resourceName)));
+
+            Trace.TraceDebug("ResourceName: {0} => FilePath: {1}", resourceName, result);
+
+            return result;
         }
 
         public bool Contains(string resourceName)

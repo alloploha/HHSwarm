@@ -1,6 +1,6 @@
 ﻿using HHSwarm.Native.Common;
-using HHSwarm.Native.Protocols.v17.Messages;
-using HHSwarm.Native.Protocols.v17.WidgetMessageArguments;
+using HHSwarm.Native.Protocols.Hafen.Messages;
+using HHSwarm.Native.Protocols.Hafen.WidgetMessageArguments;
 using HHSwarm.Native.Shared;
 using System;
 using System.Collections.Generic;

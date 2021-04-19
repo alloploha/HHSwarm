@@ -1,9 +1,6 @@
 ﻿using HHSwarm.Native.GameResources;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,32 +30,73 @@ namespace HHSwarm.TestClient
 
         private void WriteLayersToFiles(HavenResource1 resource, string resourceName)
         {
-            string file_name_base = Path.Combine(DirectoryPath, resourceName);
+            string resource_file_name = resourceName.Replace(Path.DirectorySeparatorChar, '!').Replace(Path.AltDirectorySeparatorChar, '!');
 
-            Lock.Wait();
-            try
+            // images
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(file_name_base));
-            }
-            finally
-            {
-                Lock.Release();
+                string directory_name = Path.Combine(DirectoryPath, "images");
+
+                Lock.Wait();
+                try
+                {
+                    Directory.CreateDirectory(directory_name);
+                }
+                finally
+                {
+                    Lock.Release();
+                }
+
+                for (int i = 0; i < resource.Images.Count; i++)
+                {
+                    var item = resource.Images[i];
+                    string file_name = $"{resource_file_name}-[{i + 1}]({resource.Images.Count})#{item.ID}.png";
+                    File.WriteAllBytes(Path.Combine(directory_name, file_name), item.Image);
+                    Console.WriteLine($"Extracted image: {file_name}");
+                }
             }
 
-            for (int i = 0; i < resource.Images.Count; i++)
+            // Java classes
             {
-                var image = resource.Images[i];
-                string file_name = file_name_base + $"-{i}-{image.ID}.jpeg";
-                File.WriteAllBytes(file_name, image.Image);
-                Console.WriteLine($"Extracted image: {file_name}");
+                string directory_name = Path.Combine(DirectoryPath, "classes");
+
+                Lock.Wait();
+                try
+                {
+                    Directory.CreateDirectory(directory_name);
+                }
+                finally
+                {
+                    Lock.Release();
+                }
+                for (int i = 0; i < resource.JavaClasses.Count; i++)
+                {
+                    var item = resource.JavaClasses[i];
+                    string file_name = $"{resource_file_name}-[{i + 1}]({resource.JavaClasses.Count})-{item.Name}.class";
+                    File.WriteAllBytes(Path.Combine(directory_name, file_name), item.Code);
+                    Console.WriteLine($"Extracted Java class: {file_name}");
+                }
             }
 
-            for (int i = 0; i < resource.JavaClasses.Count; i++)
+            // Java source code
             {
-                var java_class = resource.JavaClasses[i];
-                string file_name = file_name_base + $"-{i}-{java_class.Name}.class";
-                File.WriteAllBytes(file_name, java_class.Code);
-                Console.WriteLine($"Java class: {file_name}");
+                string directory_name = Path.Combine(DirectoryPath, "java");
+
+                Lock.Wait();
+                try
+                {
+                    Directory.CreateDirectory(directory_name);
+                }
+                finally
+                {
+                    Lock.Release();
+                }
+                for (int i = 0; i < resource.JavaSourceCode.Count; i++)
+                {
+                    var item = resource.JavaSourceCode[i];
+                    string file_name = $"{resource_file_name}-[{i + 1}]({resource.JavaSourceCode.Count}){item.FileName}";
+                    File.WriteAllBytes(Path.Combine(directory_name, file_name), item.Text);
+                    Console.WriteLine($"Extracted Java source code: {file_name}");
+                }
             }
         }
     }

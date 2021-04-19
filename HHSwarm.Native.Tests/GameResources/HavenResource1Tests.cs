@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using HHSwarm.Native.Protocols.v17;
+using HHSwarm.Native.Protocols.Hafen;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace HHSwarm.Native.GameResources.Tests

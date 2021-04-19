@@ -76,10 +76,10 @@
     <Compile Include="Protocols\TcpServerTests.cs" />
     <Compile Include="Protocols\UdpClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Protocols\v17\SessionClientTests.cs" />
-    <Compile Include="Protocols\v17\AuthenticationClientTests.cs" />
-    <Compile Include="Protocols\v17\RelayClientTests.cs" />
-    <Compile Include="Protocols\v17\WidgetMessageArguments\AdvancedRelativePositionComputerTests.cs" />
+    <Compile Include="Protocols\Hafen\SessionClientTests.cs" />
+    <Compile Include="Protocols\Hafen\AuthenticationClientTests.cs" />
+    <Compile Include="Protocols\Hafen\RelayClientTests.cs" />
+    <Compile Include="Protocols\Hafen\WidgetMessageArguments\AdvancedRelativePositionComputerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HHSwarm.Native\Native.csproj">
@@ -131,7 +131,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="HHSwarm-DevTestKey.snk" />
-    <None Include="Protocols\v17\Samples\MSG_REL_NEWWDG.bin">
+    <None Include="Protocols\Hafen\Samples\MSG_REL_NEWWDG.bin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

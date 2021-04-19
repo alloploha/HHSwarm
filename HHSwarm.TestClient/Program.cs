@@ -3,8 +3,8 @@ using HHSwarm.Model.Shared;
 using HHSwarm.Native;
 using HHSwarm.Native.GameResources;
 using HHSwarm.Native.Protocols;
-using HHSwarm.Native.Protocols.v17;
-using HHSwarm.Native.Protocols.v17.Messages;
+using HHSwarm.Native.Protocols.Hafen;
+using HHSwarm.Native.Protocols.Hafen.Messages;
 using HHSwarm.Native.WorldModel;
 using HHSwarm.TestClient.Properties;
 using System;
@@ -184,7 +184,7 @@ namespace HHSwarm.TestClient
             Task authentication_listen = authentication_transport.ListenAsync();
             Task session_listen = session_transport.ListenAsync(cancel);
 
-            ModelFactory_v17 factory = new ModelFactory_v17(relay, session, client);
+            ModelFactory factory = new ModelFactory(relay, session, client);
 
             Account account = factory.ConstructAccount
             (

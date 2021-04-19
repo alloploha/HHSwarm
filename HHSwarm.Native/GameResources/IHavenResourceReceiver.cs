@@ -26,5 +26,9 @@ namespace HHSwarm.Native.GameResources
         void Receive(VertexBufferResourceLayer1 resource);
         void Receive(TooltipResourceLayer resource);
         void Receive(LightResourceLayer resource);
+        void Receive(PaginaResourceLayer resource);
+        void Receive(AnimationResourceLayer resource);
+        void Receive(ActionButtonResourceLayer resource);
+        void Receive(JavaSourceCodeResourceLayer resource);
     }
 }

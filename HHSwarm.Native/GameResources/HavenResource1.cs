@@ -1,5 +1,5 @@
 ﻿using HHSwarm.Native.GameResources.Graphics;
-using HHSwarm.Native.Protocols.v17;
+using HHSwarm.Native.Protocols.Hafen;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,7 +14,10 @@ namespace HHSwarm.Native.GameResources
     [Serializable]
     public class HavenResource1 : IHavenResourceReceiver
     {
-        private static readonly byte[] FILE_SIGNATURE = Encoding.ASCII.GetBytes("Haven Resource 1");
+        /// <remarks>
+        /// https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L1528
+        /// </remarks>
+        internal static readonly byte[] FILE_SIGNATURE = Encoding.ASCII.GetBytes("Haven Resource 1");
 
 
         public readonly IList<JavaClassResourceLayer> JavaClasses = new List<JavaClassResourceLayer>();
@@ -141,6 +144,34 @@ namespace HHSwarm.Native.GameResources
         public void Receive(LightResourceLayer resource)
         {
             Lights.Add(resource);
+        }
+        
+        public readonly IList<PaginaResourceLayer> Paginae = new List<PaginaResourceLayer>();
+
+        public void Receive(PaginaResourceLayer resource)
+        {
+            Paginae.Add(resource);
+        }
+
+        public readonly IList<AnimationResourceLayer> Animations = new List<AnimationResourceLayer>();
+
+        public void Receive(AnimationResourceLayer resource)
+        {
+            Animations.Add(resource);
+        }
+
+        public readonly IList<ActionButtonResourceLayer> Actions = new List<ActionButtonResourceLayer>();
+
+        public void Receive(ActionButtonResourceLayer resource)
+        {
+            Actions.Add(resource);
+        }
+
+        public readonly IList<JavaSourceCodeResourceLayer> JavaSourceCode = new List<JavaSourceCodeResourceLayer>();
+
+        public void Receive(JavaSourceCodeResourceLayer resource)
+        {
+            JavaSourceCode.Add(resource);
         }
     }
 }

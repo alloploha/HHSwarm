@@ -1,4 +1,4 @@
-﻿using HHSwarm.Native.Protocols.v17;
+﻿using HHSwarm.Native.Protocols.Hafen;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,6 +10,14 @@ using System.Threading.Tasks;
 
 namespace HHSwarm.Native.GameResources
 {
+    /// <summary>
+    /// Скачивает файлы "ресурсов" с веб-сервера.
+    /// Логически, ресурсы - это неизменяемые данные, не зависящие от конкретного игрока или текущего состояния игры.
+    /// Например: текстуры, параметры источников света, текст, номера версий обьектов, растровые изображения, скомпилированные java-классы.
+    /// Физически, каждый ресурс - это файл, специального формата.
+    /// <seealso cref="HavenResource1"/>
+    /// <seealso cref="HavenResource1Formatter"/>
+    /// </summary>
     public class WebSourceOfGameResources : ISourceOfGameResources
     {
         private TraceSource Trace = new TraceSource("HHSwarm.Resources");
@@ -29,9 +37,11 @@ namespace HHSwarm.Native.GameResources
             WebClient client = new WebClient();
             client.Headers.Add(HttpRequestHeader.UserAgent, UserAgent);
 
-            Trace.TraceInformation($"Downloading resource '{resourceName}' from network...");
+            string url = ResourcesBaseUri + $"{resourceName}.res";
 
-            byte[] data = await client.DownloadDataTaskAsync(ResourcesBaseUri + $"{resourceName}.res");
+            Trace.TraceInformation($"Downloading resource '{resourceName}' from '{url}'...");
+
+            byte[] data = await client.DownloadDataTaskAsync(url);
 
             Trace.TraceInformation($"Downloaded resource '{resourceName}', data length {data.Length} bytes.");
 
@@ -44,7 +54,7 @@ namespace HHSwarm.Native.GameResources
             string trace_dump_message = $"Deserialized game resource layer from '{resourceName}'";
             receiver = new HavenResourceTraceDump(trace_dump_message, result);
 #endif
-
+            
             using (MemoryStream mem = new MemoryStream(data))
             {
                 serializer.Deserialize(new MessageBinaryReader(mem, Encoding.UTF8), receiver);

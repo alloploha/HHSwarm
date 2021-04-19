@@ -1,4 +1,4 @@
-﻿using HHSwarm.Native.Protocols.v17;
+﻿using HHSwarm.Native.Protocols.Hafen;
 using HHSwarm.TestClient.Properties;
 using System.IO;
 using System.IO.IsolatedStorage;
