@@ -66,7 +66,10 @@ namespace System.IO
             byte alpha = @this.ReadByte();
             return Color.FromArgb(alpha, red, green, blue);
         }
-
+        
+        /// <remarks>
+        /// https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Message.java#L187
+        /// </remarks>
         public static Coord2i ReadCoord2i(this BinaryReader @this)
         {
             return new Coord2i

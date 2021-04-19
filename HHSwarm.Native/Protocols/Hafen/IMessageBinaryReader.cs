@@ -49,6 +49,14 @@ namespace System.IO
         ulong ReadUInt64BigEndian();
         long ReadInt64BigEndian();
         Color ReadColor();
+
+        /// <summary>
+        /// Считывает два 32-х разрядных числа.
+        /// <para>
+        /// <see cref="Coord2i"/> может быть присвоен <see cref="Point"/>.
+        /// <code>java: new MessageBuf(data).coord()</code>
+        /// </para>
+        /// </summary>
         Coord2i ReadCoord2i();
         Coord2f ReadCoord2f();
         Coord2d ReadCoord2d();
@@ -57,7 +65,7 @@ namespace System.IO
         Coord3d ReadCoord3d();
 
         /// <summary>
-        /// <c>Message.uint8()</c>
+        /// <c>java: Message.uint8()</c>
         /// </summary>
         /// <remarks>
         /// https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Message.java#L109
@@ -72,11 +80,28 @@ namespace System.IO
         char ReadChar();
         char[] ReadChars(int count);
         decimal ReadDecimal();
+
+        /// <summary>
+        /// <c>java: double Message.float32()</c>
+        /// </summary>
+        /// <returns></returns>
         double ReadDouble();
+
         sbyte ReadSByte();
         float ReadSingle();
+
+        /// <summary>
+        /// <c>java: double Message.cpfloat()</c>
+        /// </summary>
+        /// <returns></returns>
         double ReadDouble20bit();
+
+        /// <summary>
+        /// <c>java: float Message.float16()</c>
+        /// </summary>
+        /// <returns></returns>
         float ReadSingle16bit();
+
         IEnumerable<object> ReadList();
         Coord3f ReadCoord3f32bit();
         Coord3f ReadCoord3f20bit();

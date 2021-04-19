@@ -168,11 +168,17 @@ namespace HHSwarm.Native.Protocols.Hafen
             return ((BinaryReader)this).ReadCoord3d();
         }
 
+        /// <remarks>
+        /// https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Message.java#L207
+        /// </remarks>
         public double ReadDouble20bit()
         {
             return ((BinaryReader)this).ReadDouble20bit();
         }
 
+        /// <remarks>
+        /// https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Message.java#L199
+        /// </remarks>
         public float ReadSingle16bit()
         {
             return ((BinaryReader)this).ReadSingle16bit();

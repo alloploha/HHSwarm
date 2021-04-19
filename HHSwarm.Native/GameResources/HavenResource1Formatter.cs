@@ -1366,6 +1366,7 @@ namespace HHSwarm.Native.GameResources
         {
             resource = ExtractResourceFromLayer(reader, (nextLayerPosition) =>
             {
+                // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L925-L943
                 ImageResourceLayer result = new ImageResourceLayer()
                 {
                     Z = reader.ReadInt16(),
@@ -1373,11 +1374,36 @@ namespace HHSwarm.Native.GameResources
                     Flags = (ImageResourceLayer.FLAGS)reader.ReadByte(),
                     ID = reader.ReadInt16(),
                     O = new Point(x: reader.ReadInt16(), y: reader.ReadInt16()),
-
-                    // https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Resource.java#L925-L943
-                    // TODO: *** NEXT
-                    Image = reader.ReadBytes((int)(nextLayerPosition - reader.Position))
                 };
+
+                Dictionary<string, byte[]> kvdata = new Dictionary<string, byte[]>();
+
+                if(result.Flags.HasFlag(ImageResourceLayer.FLAGS.Meatadata))
+                {
+                    for (string key = reader.ReadString((int)(nextLayerPosition - reader.Position)); !String.IsNullOrEmpty(key); key = reader.ReadString((int)(nextLayerPosition - reader.Position)))
+                    {
+                        int len = reader.ReadByte();
+                        if ((len & 0x80) != 0)
+                            len = reader.ReadInt32();
+
+                        switch (key)
+                        {
+                            case "tsz":
+                                result.tsz = reader.ReadCoord2i();
+                                break;
+                            case "scale":
+                                result.Scale = reader.ReadSingle();
+                                break;
+                            default:
+                                kvdata.Add(key, reader.ReadBytes(len));
+                                break;
+                        }
+                    }
+                }
+
+                result.kvdata = kvdata.Select(_ => new ImageResourceLayer.KVData() { Key = _.Key, Data = _.Value }).ToArray();
+
+                result.Image = reader.ReadBytes((int)(nextLayerPosition - reader.Position));
 
                 return result;
             });

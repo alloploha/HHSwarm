@@ -12,6 +12,9 @@ namespace System.IO
         /// <summary>
         /// 'hfdec', 'float hfdec(short bits)'
         /// </summary>
+        /// <remarks>
+        /// https://github.com/dolda2000/hafen-client/blob/019f9dbcc1813a6bec0a13a0b7a3157177750ad2/src/haven/Message.java#L196
+        /// </remarks>
         public static float ReadSingle16bit(this BinaryReader reader)
         {
             short bits = reader.ReadInt16();
